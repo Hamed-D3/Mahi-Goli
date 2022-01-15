@@ -9,3 +9,8 @@ class Person(models.Model):
 
     def __str__(self):
         return self.first_name + ' ' + self.middle_name + ' ' + self.last_name
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=150)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL)
