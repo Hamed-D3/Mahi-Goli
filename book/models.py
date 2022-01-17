@@ -1,6 +1,14 @@
 from django.db import models
 
 # Create your models here.
+def file_format_validator(file_name) -> bool:
+    """validate format file of book"""
+    from django.core.exceptions import ValidationError
+    formats = ('.pdf', '.epub', '.rar', '.zip')
+    if not file_name[file_name.rfind('.'):].lower() in formats:
+        raise ValidationError("Unsupported file extension.")
+
+
 # abstract person model for inheritance author and translator model
 class AbstractPerson(models.Model):
     first_name = models.CharField(max_length=75, null=False, blank=False, verbose_name="نام")
@@ -49,12 +57,9 @@ class Category(models.Model):
         verbose_name_plural = "دسته‌بندی‌ها"
 
 
-def file_format_validator(file_name) -> bool:
-    """validate format file of book"""
-    from django.core.exceptions import ValidationError
-    formats = ('.pdf', '.epub', '.rar', '.zip')
-    if not file_name[file_name.rfind('.'):].lower() in formats:
-        raise ValidationError("Unsupported file extension.")
+class Publisher(models.Model):
+    title = models.CharField(max_length=256, verbose_name="نام")
+    url = models.URLField(max_length=256, verbose_name="وب سایت")
 		
 		
 class Book(models.Model):
@@ -74,6 +79,21 @@ class Book(models.Model):
         ('p', 'فیزیکی'),
         ('e', 'الکترونیکی'),
     )
+    MONEY_UNIT = (
+        ("IRR", "ریال ایران"),
+        ("USD", "دلار آمریکا"),
+        ("GBP", "پوند انگلیس"),
+        ("CAD", "دلار کانادا"),
+        ("AUD", "دلار استرالیا"),
+    )
+    PLATFROM_LIST = (
+        ("taghc", "طاقچه"),
+        ("ketab", "کتابراه"),
+        ("teleg", "تلگرام"),
+        ("websi", "وب سایت"),
+        ("prlib", "کتابخانه شخصی"),
+        ("pulib", "کتابخانه عمومی"),
+    )
     title = models.CharField(max_length=1500, verbose_name="نام کتاب")
     author = models.ManyToManyField(Author, verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
@@ -83,9 +103,14 @@ class Book(models.Model):
     book_file = models.FileField(upload_to='./book_files/', blank=True, validators=[file_format_validator])
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="دسته‌بندی")
     price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, verbose_name="قیمت")
-    user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات")
+    price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="IRR", verbose_name="واحد پول")
+    user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
     rate = models.SmallIntegerField(choices=RATE_CHOICES, null=True, blank=True, verbose_name="امتیاز")
     book_type = models.CharField(max_length=1, choices=BOOK_TYPES, default="e", verbose_name="نوع کتاب")
+    pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
+    pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
+    book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
+    platform = models.CharField(max_length=5, null=True, blank=True, verbose_name="منبع کتاب")
 
 
     class Meta:
