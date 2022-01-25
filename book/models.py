@@ -69,6 +69,11 @@ class Publisher(models.Model):
     class Meta:
         verbose_name = "ناشر"
         verbose_name_plural = "ناشرین"
+
+
+    def show_url(self):
+        return self.url[:100]
+    show_url.short_description = "آدرس اینترنتی"
 		
 		
 class Book(models.Model):
