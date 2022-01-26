@@ -109,7 +109,7 @@ class Book(models.Model):
         ("pulib", "کتابخانه عمومی"),
     )
     title = models.CharField(max_length=1500, verbose_name="نام کتاب")
-    author = models.ManyToManyField(Author, verbose_name="نویسنده")
+    author = models.ManyToManyField(Author, related_name="books", verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
     teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
     language_book = models.CharField(max_length=3, choices=LANGUAGE_CHOICES, default="per")
@@ -133,3 +133,21 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def show_author(self):
+        if self.author.all():
+            return '، '.join([str(author) for author in self.author.all()])
+        else:
+            return '-'
+
+    def show_translator(self):
+        if self.translator.all():
+            return '، '.join([str(translator) for translator in self.translator.all()])
+        else:
+            return '-'
+
+    def show_teller(self):
+        if self.teller.all():
+            return '، '.join([str(teller) for teller in self.teller.all()])
+        else:
+            return '-'
