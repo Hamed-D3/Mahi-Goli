@@ -124,7 +124,7 @@ class Book(models.Model):
     pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
     pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
     book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
-    platform = models.CharField(max_length=5, null=True, blank=True, verbose_name="منبع کتاب")
+    platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
 
 
     class Meta:
