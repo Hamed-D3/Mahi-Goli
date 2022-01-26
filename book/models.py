@@ -112,7 +112,7 @@ class Book(models.Model):
     author = models.ManyToManyField(Author, related_name="books", verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
     teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
-    language_book = models.CharField(max_length=3, choices=LANGUAGE_CHOICES, default="per")
+    language_book = models.CharField(max_length=3, choices=LANGUAGE_CHOICES, default="per", verbose_name="زبان کتاب")
     book_url = models.URLField(max_length=1024, null=True, blank=True, default=None)
     book_file = models.FileField(upload_to='./book_files/', blank=True, validators=[file_format_validator])
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="دسته‌بندی")
