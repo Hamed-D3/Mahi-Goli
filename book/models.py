@@ -139,15 +139,18 @@ class Book(models.Model):
             return '، '.join([str(author) for author in self.author.all()])
         else:
             return '-'
+    show_author.short_description = "نویسندگان"
 
     def show_translator(self):
         if self.translator.all():
             return '، '.join([str(translator) for translator in self.translator.all()])
         else:
             return '-'
+    show_translator.short_description = "مترجمین"
 
     def show_teller(self):
         if self.teller.all():
             return '، '.join([str(teller) for teller in self.teller.all()])
         else:
             return '-'
+    show_teller.short_description = "گویندگان"
