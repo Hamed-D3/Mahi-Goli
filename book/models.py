@@ -82,6 +82,9 @@ class Publisher(models.Model):
         verbose_name = "ناشر"
         verbose_name_plural = "ناشرین"
 
+    def __str__(self):
+        return self.title
+
 
     def show_url(self):
         return self.url[:100]
