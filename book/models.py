@@ -69,6 +69,9 @@ class Category(models.Model):
         verbose_name = "دسته‌بندی"
         verbose_name_plural = "دسته‌بندی‌ها"
 
+    def __str__(self):
+        return self.title
+
 
 class Publisher(models.Model):
     title = models.CharField(max_length=256, verbose_name="نام")
@@ -115,6 +118,7 @@ class Book(models.Model):
     user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
     book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
     book_url = models.URLField(max_length=1024, null=True, blank=True, default=None)
+    publisher = models.ForeignKey(Publisher, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="ناشر")
 
     class Meta:
         verbose_name = "کتاب"
