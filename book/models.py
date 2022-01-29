@@ -1,11 +1,19 @@
+from email.policy import default
 from django.db import models
 from django.utils.html import format_html
 
 # Create your models here.
-def file_format_validator(file_name) -> bool:
+def ebook_file_format_validator(file_name) -> bool:
     """validate format file of book"""
     from django.core.exceptions import ValidationError
-    formats = ('.pdf', '.epub', '.rar', '.zip')
+    formats = ('.pdf', '.epub', '.rar', '.zip', '.7z', '.tar')
+    if not file_name[file_name.rfind('.'):].lower() in formats:
+        raise ValidationError("Unsupported file extension.")
+
+def audiobook_file_format_validator(file_name) -> bool:
+    """validate format file of book"""
+    from django.core.exceptions import ValidationError
+    formats = ('.mp3', '.wav', '.wma', '.wmv', '.rar', '.zip', '.7z', '.tar')
     if not file_name[file_name.rfind('.'):].lower() in formats:
         raise ValidationError("Unsupported file extension.")
 
@@ -74,8 +82,8 @@ class Publisher(models.Model):
     def show_url(self):
         return self.url[:100]
     show_url.short_description = "آدرس اینترنتی"
-		
-		
+
+
 class Book(models.Model):
     LANGUAGE_CHOICES = (
         ('eng', 'انگلیسی'),
@@ -88,51 +96,30 @@ class Book(models.Model):
         (4, 'خوب'),
         (5, 'عالی'),
     )
-    BOOK_TYPES = (
-        ('a', 'صوتی'),
-        ('p', 'فیزیکی'),
-        ('e', 'الکترونیکی'),
-    )
     MONEY_UNIT = (
+        ("FRE", "رایگان"),
         ("IRR", "ریال ایران"),
         ("USD", "دلار آمریکا"),
         ("GBP", "پوند انگلیس"),
         ("CAD", "دلار کانادا"),
         ("AUD", "دلار استرالیا"),
     )
-    PLATFROM_LIST = (
-        ("taghc", "طاقچه"),
-        ("ketab", "کتابراه"),
-        ("teleg", "تلگرام"),
-        ("websi", "وب سایت"),
-        ("prlib", "کتابخانه شخصی"),
-        ("pulib", "کتابخانه عمومی"),
-    )
     title = models.CharField(max_length=1500, verbose_name="نام کتاب")
-    author = models.ManyToManyField(Author, related_name="books", verbose_name="نویسنده")
+    author = models.ManyToManyField(Author, verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
-    teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
-    language_book = models.CharField(max_length=3, choices=LANGUAGE_CHOICES, default="per", verbose_name="زبان کتاب")
-    book_url = models.URLField(max_length=1024, null=True, blank=True, default=None)
-    book_file = models.FileField(upload_to='./book_files/', blank=True, validators=[file_format_validator])
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="دسته‌بندی")
-    price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, verbose_name="قیمت")
-    price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="IRR", verbose_name="واحد پول")
-    user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
+    language_book = models.CharField(max_length=3, null=True, blank=True, choices=LANGUAGE_CHOICES, default=None, verbose_name="زبان کتاب")
     rate = models.SmallIntegerField(choices=RATE_CHOICES, null=True, blank=True, verbose_name="امتیاز")
-    book_type = models.CharField(max_length=1, choices=BOOK_TYPES, default="e", verbose_name="نوع کتاب")
-    pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
-    pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="دسته‌بندی")
+    price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0, verbose_name="قیمت")
+    price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="FRE", verbose_name="واحد پول")
+    user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
     book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
-    platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
-
+    book_url = models.URLField(max_length=1024, null=True, blank=True, default=None)
 
     class Meta:
         verbose_name = "کتاب"
         verbose_name_plural = "کتب"
-
-    def __str__(self) -> str:
-        return self.title
+        abstract = True
 
     def show_author(self):
         if self.author.all():
@@ -147,6 +134,82 @@ class Book(models.Model):
         else:
             return '-'
     show_translator.short_description = "مترجمین"
+    
+
+class TextBook(Book):
+    pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
+    pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
+    read_flag = models.BooleanField(default=False, verbose_name='خوانده شده')
+
+    class Meta:
+        verbose_name = "کتاب متنی"
+        verbose_name_plural = "کتب متنی"
+        abstract = True
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class PhysicalBook(TextBook):
+    PLATFROM_LIST = (
+        ("borro", "قرض گرفته شده"),
+        ("prlib", "کتابخانه شخصی"),
+        ("pulib", "کتابخانه عمومی"),
+    )
+    platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
+
+    class Meta:
+        verbose_name = "کتاب فیزیکی"
+        verbose_name_plural = "کتب فیزیکی"
+
+    def __str__(self) -> str:
+        return self.title
+
+
+class ElectronicBook(TextBook):
+    PLATFROM_LIST = (
+        ("taghc", "طاقچه"),
+        ("ketab", "کتابراه"),
+        ("fidib", "فیدیبو"),
+        ("booka", "بوکاپو"),
+        ("teleg", "تلگرام"),
+        ("websi", "وب سایت"),
+        ("prlib", "کتابخانه شخصی"),
+        ("pulib", "کتابخانه عمومی"),
+    )
+    book_file = models.FileField(upload_to='./book_files/', null=True, blank=True, validators=[ebook_file_format_validator])
+    platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
+
+    class Meta:
+        verbose_name = "کتاب الکترونیکی"
+        verbose_name_plural = "کتب الکترونیکی"
+
+    def __str__(self) -> str:
+        return self.title
+
+class AudioBook(Book):
+    PLATFROM_LIST = (
+        ("taghc", "طاقچه"),
+        ("ketab", "کتابراه"),
+        ("fidib", "فیدیبو"),
+        ("booka", "بوکاپو"),
+        ("teleg", "تلگرام"),
+        ("websi", "وب سایت"),
+        ("castb", "کست باکس")
+    )
+    teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
+    episode = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="قسمت")
+    season = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="فصل")
+    listen_flag = models.BooleanField(default=False, verbose_name="گوش داده شده")
+    platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
+    book_file = models.FileField(upload_to='./book_files/', null=True, blank=True, validators=[audiobook_file_format_validator])
+
+    class Meta:
+        verbose_name = "کتاب صوتی"
+        verbose_name_plural = "کتب صوتی"
+
+    def __str__(self) -> str:
+        return self.title
 
     def show_teller(self):
         if self.teller.all():
