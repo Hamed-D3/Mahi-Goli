@@ -152,9 +152,14 @@ class Book(models.Model):
     
 
 class TextBook(Book):
+    READ_CHOICES = (
+        ('U', "خوانده نشده"), # unread
+        ('S', "در حال مطالعه"), # study
+        ('R', "خوانده شده"), # read
+    )
     pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
     pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
-    read_flag = models.BooleanField(default=False, verbose_name='خوانده شده')
+    read_status = models.CharField(max_length=1, choices=READ_CHOICES, default='U', verbose_name='وضعیت')
 
     class Meta:
         verbose_name = "کتاب متنی"
@@ -202,6 +207,7 @@ class ElectronicBook(TextBook):
     def __str__(self) -> str:
         return self.title
 
+
 class AudioBook(Book):
     PLATFROM_LIST = (
         ("taghc", "طاقچه"),
@@ -212,10 +218,15 @@ class AudioBook(Book):
         ("websi", "وب سایت"),
         ("castb", "کست باکس")
     )
+    LISTEN_STATUS = (
+        ('U', "خوانده نشده"), # unheard
+        ('L', "در حال مطالعه"), # listening
+        ('H', "خوانده شده"), # heard
+    )
     teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
     episode = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="قسمت")
     season = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="فصل")
-    listen_flag = models.BooleanField(default=False, verbose_name="گوش داده شده")
+    listen_status = models.CharField(max_length=1, choices=LISTEN_STATUS, default='U', verbose_name="وضعیت")
     platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
     book_file = models.FileField(upload_to='./book_files/', null=True, blank=True, validators=[audiobook_file_format_validator])
 
