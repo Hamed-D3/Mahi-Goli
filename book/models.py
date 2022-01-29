@@ -1,4 +1,5 @@
 from email.policy import default
+from unicodedata import category
 from django.db import models
 from django.utils.html import format_html
 
@@ -138,6 +139,13 @@ class Book(models.Model):
         else:
             return '-'
     show_translator.short_description = "مترجمین"
+
+    def show_category(self):
+        if self.category.all():
+            return '، '.join([str(category) for category in self.category.all()])
+        else:
+            return '-'
+    show_category.short_description = "دسته‌بندی‌ها"
     
 
 class TextBook(Book):

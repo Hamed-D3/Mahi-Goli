@@ -28,19 +28,19 @@ class PublisherAdmin(admin.ModelAdmin):
 
 
 class PhysicalBookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'show_author', 'show_translator', 'category', 'platform', 'user_rate', 'read_flag'] 
+    list_display = ['title', 'show_author', 'show_translator', 'show_category', 'platform', 'user_rate', 'read_flag'] 
     list_filter = ['language_book', 'platform', 'read_flag', 'category', 'user_rate']
     search_fields = ['title', 'author', 'translater', 'category', 'user_description', 'book_description']
 
 
 class ElectronicBookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'show_author', 'show_translator', 'category', 'platform', 'user_rate', 'read_flag'] 
+    list_display = ['title', 'show_author', 'show_translator', 'show_category', 'platform', 'user_rate', 'read_flag'] 
     list_filter = ['language_book', 'platform', 'read_flag', 'category', 'user_rate']
     search_fields = ['title', 'author', 'translater', 'category', 'user_description', 'book_description']
 
 
 class AudioBookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'show_author', 'show_translator', 'show_teller', 'category', 'platform', 'user_rate', 'listen_flag'] 
+    list_display = ['title', 'show_author', 'show_translator', 'show_teller', 'show_category', 'platform', 'user_rate', 'listen_flag'] 
     list_filter = ['language_book', 'platform', 'listen_flag', 'category', 'user_rate']
     search_fields = ['title', 'author', 'translater', 'category', 'user_description', 'book_description']
     
