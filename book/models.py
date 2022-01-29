@@ -113,7 +113,7 @@ class Book(models.Model):
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
     language_book = models.CharField(max_length=3, null=True, blank=True, choices=LANGUAGE_CHOICES, default=None, verbose_name="زبان کتاب")
     user_rate = models.SmallIntegerField(choices=RATE_CHOICES, null=True, blank=True, default=None, verbose_name="امتیاز")
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="دسته‌بندی")
+    category = models.ManyToManyField(Category, blank=True, verbose_name="دسته‌بندی")
     price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0, verbose_name="قیمت")
     price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="FRE", verbose_name="واحد پول")
     user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
