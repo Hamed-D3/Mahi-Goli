@@ -219,9 +219,9 @@ class AudioBook(Book):
         ("castb", "کست باکس")
     )
     LISTEN_STATUS = (
-        ('U', "خوانده نشده"), # unheard
-        ('L', "در حال مطالعه"), # listening
-        ('H', "خوانده شده"), # heard
+        ('U', "شنیده نشده"), # unheard
+        ('L', "در حال شنیدن"), # listening
+        ('H', "شنیده شده"), # heard
     )
     teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
     episode = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="قسمت")
