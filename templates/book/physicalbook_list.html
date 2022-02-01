@@ -30,14 +30,14 @@
 									{% for book in object_list %}
 									<tr>
 										<td>{{ forloop.counter }}</td>
-										<td></td>
+										<td><img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}"></td>
 										<td>{{ book.title }}</td>
 										<td>{{ book.show_author }}</td>
 										<td>{{ book.show_translator }}</td>
 										<td>{{ book.show_category }}</td>
 										<td>{{ book.publisher }}</td>
 										<td>{{ book.get_platform_display }}</td>
-										<td>{{ book.user_rate }}</td>
+										<td>{{ book.show_user_rate }}</td>
 										<td>{{ book.get_read_status_display }}</td>
 									</tr>
 									{% endfor %}

@@ -131,3 +131,7 @@ div.card-header .card-title {
     float: initial;
     text-align: center;
 }
+
+img.book-img {
+    height: 100px;
+}

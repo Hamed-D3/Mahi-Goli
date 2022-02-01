@@ -111,6 +111,7 @@ class Book(models.Model):
         ("CAD", "دلار کانادا"),
         ("AUD", "دلار استرالیا"),
     )
+    picture = models.ImageField(upload_to='./images/books/', blank=True, verbose_name='تصویر جلد')
     title = models.CharField(max_length=1500, verbose_name="نام کتاب")
     author = models.ManyToManyField(Author, verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
@@ -149,6 +150,13 @@ class Book(models.Model):
         else:
             return '-'
     show_category.short_description = "دسته‌بندی‌ها"
+
+    def show_user_rate(self):
+        if self.user_rate == None:
+            return '-'
+        else:
+            return self.user_rate
+    show_user_rate.short_description = "تصویر جلد"
     
 
 class TextBook(Book):
