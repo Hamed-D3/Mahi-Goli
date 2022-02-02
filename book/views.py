@@ -7,6 +7,7 @@ from .models import (
     Author,
     Translator,
     Teller,
+    Publisher,
 )
 
 # Create your views here.
@@ -65,4 +66,12 @@ class Teller(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "گویندگان"
+        return context
+
+
+class Publisher(ListView):
+    model = Publisher
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         return context

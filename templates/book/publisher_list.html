@@ -1,0 +1,40 @@
+{% extends 'book/index.html' %}
+{% load static %}
+{% block main%}
+<section class="content">
+<div class="container-fluid">
+		<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">ناشران</h3>
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body table-responsive p-0" style="height: 300px;">
+							<table class="table table-head-fixed">
+								<thead>
+									<tr>
+										<th>ردیف</th>
+										<th>ناشر</th>
+										<th>آدرس اینترنتی</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for publisher in object_list %}
+									<tr>
+										<td>{{ forloop.counter }}</td>
+										<td>{{ publisher.title }}</td>
+										<td>{{ publisher.url }}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+		</div>
+</div>
+</section>
+{% endblock %}
