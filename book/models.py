@@ -157,6 +157,12 @@ class Book(models.Model):
         else:
             return self.user_rate
     show_user_rate.short_description = "تصویر جلد"
+
+    def show_publisher(self):
+        if self.publisher:
+            return self.publisher
+        else:
+            return '-'
     
 
 class TextBook(Book):

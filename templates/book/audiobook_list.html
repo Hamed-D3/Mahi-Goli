@@ -7,7 +7,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">کتب فیزیکی</h3>
+							<h3 class="card-title">کتب صوتی</h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body table-responsive p-0" style="height: 300px;">
@@ -19,6 +19,7 @@
 										<th>نام کتاب</th>
 										<th>نویسندگان</th>
 										<th>مترجمین</th>
+										<th>گویندگان</th>
 										<th>دسته‌بندی</th>
 										<th>ناشر</th>
 										<th>منبع کتاب</th>
@@ -34,11 +35,12 @@
 										<td>{{ book.title }}</td>
 										<td>{{ book.show_author }}</td>
 										<td>{{ book.show_translator }}</td>
+										<td>{{ book.show_teller }}</td>
 										<td>{{ book.show_category }}</td>
 										<td>{{ book.show_publisher }}</td>
 										<td>{{ book.get_platform_display }}</td>
 										<td>{{ book.show_user_rate }}</td>
-										<td>{{ book.get_read_status_display }}</td>
+										<td>{{ book.get_listen_status_display }}</td>
 									</tr>
 									{% endfor %}
 								</tbody>
