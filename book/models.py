@@ -73,6 +73,13 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def show_parent(self):
+        if self.parent:
+            return self.parent
+        else:
+            return '-'
+    show_parent.short_description = 'زیر دسته'
+
 
 class Publisher(models.Model):
     title = models.CharField(max_length=256, verbose_name="نام")

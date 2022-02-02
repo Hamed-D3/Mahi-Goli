@@ -8,6 +8,7 @@ from .models import (
     Translator,
     Teller,
     Publisher,
+    Category,
 )
 
 # Create your views here.
@@ -71,6 +72,14 @@ class Teller(ListView):
 
 class Publisher(ListView):
     model = Publisher
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class Category(ListView):
+    model = Category
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

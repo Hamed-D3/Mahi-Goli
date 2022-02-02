@@ -8,6 +8,7 @@ from .views import (
     Translator,
     Teller,
     Publisher,
+    Category,
 )
 
 app_name = 'book'
@@ -20,4 +21,5 @@ urlpatterns = [
     path('translator/', Translator.as_view(), name='translator_list'),
     path('teller/', Teller.as_view(), name='teller_list'),
     path('publisher/', Publisher.as_view(), name='publisher_list'),
+    path('category/', Category.as_view(), name='category_list'),
 ]
