@@ -1,4 +1,5 @@
 {% load static %}
+{% load base_tags %}
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="#" class="brand-link">
@@ -35,54 +36,30 @@
             </a>
             <ul class="nav nav-treeview" style="display: none;">
                 <li class="nav-item">
-                    <a href="{% url 'book:physicalbook' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book-open"></i>
-                        <p>کتاب‌های فیزیکی</p>
-                    </a>
+                    {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fas fa-book-open" %}
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'book:electronicbook' %}" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
-                        <p>کتاب‌های الکترونیکی</p>
-                    </a>
+                    {% sidebar_item request 'electronicbook' "کتاب‌های الکترونیکی" "fas fa-book" %}
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'book:audiobook' %}" class="nav-link">
-                        <i class="nav-icon fas fa-headphones-alt"></i>
-                        <p>کتاب‌های صوتی</p>
-                    </a>
+                    {% sidebar_item request 'audiobook' "کتاب‌های صوتی" "fas fa-headphones-alt" %}
                 </li>
             </ul>
         </li>
         <li class="nav-item">
-            <a href="{% url 'book:category' %}" class="nav-link">
-                <i class="nav-icon far fa-circle"></i>
-                <p>دسته‌بندی</p>
-            </a>
+            {% sidebar_item request 'category' "دسته‌بندی" "far fa-circle" %}
         </li>
         <li class="nav-item">
-            <a href="{% url 'book:author' %}" class="nav-link">
-                <i class="nav-icon far fa-circle"></i>
-                <p>نویسندگان</p>
-            </a>
+            {% sidebar_item request 'author' "نویسندگان" "far fa-circle" %}
         </li>
         <li class="nav-item">
-            <a href="{% url 'book:translator' %}" class="nav-link">
-                <i class="nav-icon far fa-circle"></i>
-                <p>مترجمین</p>
-            </a>
+            {% sidebar_item request 'translator' "مترجمین" "far fa-circle" %}
         </li>
         <li class="nav-item">
-            <a href="{% url 'book:teller' %}" class="nav-link">
-                <i class="nav-icon far fa-circle"></i>
-              <p>گویندگان</p>
-            </a>
+            {% sidebar_item request 'teller' "گویندگان" "far fa-circle" %}
         </li>
         <li class="nav-item">
-            <a href="{% url 'book:publisher' %}" class="nav-link">
-              <i class="nav-icon far fa-circle"></i>
-              <p>ناشرین</p>
-            </a>
+            {% sidebar_item request 'publisher' "ناشرین" "far fa-circle" %}
         </li>
     </ul>
     </nav>
