@@ -26,15 +26,15 @@
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
         <li class="nav-header">بخش کتب</li>
-        <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' %}">
+            <a href="#" class="nav-link {% active_book_item request 'active' %}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 کتاب‌ها
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview" style="display: none;">
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' %};">
                 <li class="nav-item">
                     {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fas fa-book-open" %}
                 </li>
