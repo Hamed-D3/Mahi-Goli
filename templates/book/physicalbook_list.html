@@ -30,7 +30,7 @@
 									{% for book in object_list %}
 									<tr>
 										<td>{{ forloop.counter }}</td>
-										<td><img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}"></td>
+										<td>{% if book.picture %}<img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}">{% endif %}</td>
 										<td>{{ book.title }}</td>
 										<td>{{ book.show_author }}</td>
 										<td>{{ book.show_translator }}</td>

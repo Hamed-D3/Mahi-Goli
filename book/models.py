@@ -104,8 +104,8 @@ class Book(models.Model):
         (5, 'عالی'),
     )
     MONEY_UNIT = (
-        ("FRE", "رایگان"),
-        ("IRR", "ریال ایران"),
+        ("FRE", "---"),
+        ("IRR", "تومان ایران"),
         ("USD", "دلار آمریکا"),
         ("GBP", "پوند انگلیس"),
         ("CAD", "دلار کانادا"),
@@ -164,6 +164,7 @@ class TextBook(Book):
         ('U', "خوانده نشده"), # unread
         ('S', "در حال مطالعه"), # study
         ('R', "خوانده شده"), # read
+        ('M', "نشان شده"), # mark
     )
     pages_readed = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="صفحات خوانده شده")
     pages = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="تعداد صفحات کتاب")
@@ -230,6 +231,7 @@ class AudioBook(Book):
         ('U', "شنیده نشده"), # unheard
         ('L', "در حال شنیدن"), # listening
         ('H', "شنیده شده"), # heard
+        ('M', "نشان شده"), # mark
     )
     teller = models.ManyToManyField(Teller, blank=True, verbose_name="گوینده")
     episode = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="قسمت")
