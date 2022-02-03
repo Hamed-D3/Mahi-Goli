@@ -1,5 +1,6 @@
+import random
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from .models import (
     PhysicalBook,
     ElectronicBook,
@@ -12,8 +13,63 @@ from .models import (
 )
 
 # Create your views here.
-def index(request):
-    return render(request, 'book/index.html')
+class AllBook(TemplateView):
+
+    def get(self, request, **kwargs):
+        all_book = []
+
+        physicalbook = PhysicalBook.objects.all()
+        electronicbook = ElectronicBook.objects.all()
+        audiobook = AudioBook.objects.all()
+
+        for book in physicalbook:
+            all_book.append({
+                'picture': book.picture,
+                'title': book.title,
+                'show_author': book.show_author,
+                'show_translator': book.show_translator,
+                'show_category': book.show_category,
+                'show_publisher': book.show_publisher,
+                'show_user_rate': book.show_user_rate,
+                'status': book.get_read_status_display(),
+                'platform': book.get_platform_display(),
+                'type': 'فیزیکی'
+            })
+        
+        for book in electronicbook:
+            all_book.append({
+                'picture': book.picture,
+                'title': book.title,
+                'show_author': book.show_author,
+                'show_translator': book.show_translator,
+                'show_category': book.show_category,
+                'show_publisher': book.show_publisher,
+                'show_user_rate': book.show_user_rate,
+                'status': book.get_read_status_display(),
+                'platform': book.get_platform_display(),
+                'type': 'الکترونیکی'
+            })
+
+        for book in audiobook:
+            all_book.append({
+                'picture': book.picture,
+                'title': book.title,
+                'show_author': book.show_author,
+                'show_translator': book.show_translator,
+                'show_category': book.show_category,
+                'show_publisher': book.show_publisher,
+                'show_user_rate': book.show_user_rate,
+                'status': book.get_listen_status_display(),
+                'platform': book.get_platform_display(),
+                'type': 'صوتی'
+            })
+
+        random.shuffle(all_book)
+        context = {
+            'all_book': all_book
+        }
+
+        return render(request, 'book/index.html', context)
 
 
 class PhysicalBookList(ListView):

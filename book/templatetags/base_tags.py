@@ -16,7 +16,7 @@ def sidebar_item(request, link_name, content, icon_classes):
 
 @register.simple_tag
 def active_book_item(request, *args):
-    book_url_names = ('physicalbook', 'electronicbook', 'audiobook')
+    book_url_names = ('physicalbook', 'electronicbook', 'audiobook', 'allbook')
     if resolve(request.path_info).url_name in book_url_names:
         if args[0] == 'menu-open':
             return 'menu-open'

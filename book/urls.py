@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    index,
+    AllBook,
     PhysicalBookList,
     ElectronicBookList,
     AudioBookList,
@@ -13,7 +13,7 @@ from .views import (
 
 app_name = 'book'
 urlpatterns = [
-    path('', index, name='index'),
+    path('', AllBook.as_view(), name='allbook'),
     path('physicalbook/', PhysicalBookList.as_view(), name='physicalbook'),
     path('electronicbook/', ElectronicBookList.as_view(), name='electronicbook'),
     path('audiobook/', AudioBookList.as_view(), name='audiobook'),
