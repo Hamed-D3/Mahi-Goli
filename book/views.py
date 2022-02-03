@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'book/index.html')
 
 
-class PhysicalBook(ListView):
+class PhysicalBookList(ListView):
     model = PhysicalBook
     
     def get_context_data(self, **kwargs):
@@ -24,7 +24,7 @@ class PhysicalBook(ListView):
         return context
 
 
-class ElectronicBook(ListView):
+class ElectronicBookList(ListView):
     model = ElectronicBook
 
     def get_context_data(self, **kwargs):
@@ -32,7 +32,7 @@ class ElectronicBook(ListView):
         return context
 
 
-class AudioBook(ListView):
+class AudioBookList(ListView):
     model = AudioBook
 
     def get_context_data(self, **kwargs):
@@ -40,7 +40,7 @@ class AudioBook(ListView):
         return context
 
 
-class Author(ListView):
+class AuthorList(ListView):
     model = Author
     template_name = 'book/person_list.html'
 
@@ -50,7 +50,7 @@ class Author(ListView):
         return context
 
 
-class Translator(ListView):
+class TranslatorList(ListView):
     model = Translator
     template_name = 'book/person_list.html'
 
@@ -60,7 +60,7 @@ class Translator(ListView):
         return context
 
 
-class Teller(ListView):
+class TellerList(ListView):
     model = Teller
     template_name = 'book/person_list.html'
 
@@ -70,7 +70,7 @@ class Teller(ListView):
         return context
 
 
-class Publisher(ListView):
+class PublisherList(ListView):
     model = Publisher
 
     def get_context_data(self, **kwargs):
@@ -78,7 +78,7 @@ class Publisher(ListView):
         return context
 
 
-class Category(ListView):
+class CategoryList(ListView):
     model = Category
 
     def get_context_data(self, **kwargs):
