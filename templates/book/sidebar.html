@@ -26,20 +26,31 @@
         <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
         <li class="nav-header">بخش کتب</li>
-        <li class="nav-item has-treeview {% active_book_item request 'menu-open' %}">
-            <a href="{% url 'book:allbook' %}" class="nav-link {% active_book_item request 'active' %}">
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'parent' %}">
+            <a href="{% url 'book:allbook' %}" class="nav-link {% active_book_item request 'active' 'parent' %}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 کتاب‌ها
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' %};">
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'parent' %};">
                 <li class="nav-item">
                     {% sidebar_item request 'allbook' "تمامی کتاب‌ها" "fas fa-book" %}
                 </li>
-                <li class="nav-item">
-                    {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fas fa-book-open" %}
+                <li class="nav-item has-treeview {% active_book_item request 'menu-open' '' %}">
+                    <a href="{% url 'book:physicalbook' %}" class="nav-link {% active_book_item request 'active' '' %}">
+                      <i class="nav-icon fas fa-book-open"></i>
+                      <p>
+                        کتاب‌های فیزیکی
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' '' %};">
+                        <li class="nav-item">
+                            {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fas fa-book-open" %}
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     {% sidebar_item request 'electronicbook' "کتاب‌های الکترونیکی" "fas fa-book" %}
