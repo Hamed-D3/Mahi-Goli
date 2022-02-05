@@ -123,7 +123,7 @@ class Book(models.Model):
     price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="FRE", verbose_name="واحد پول")
     user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
     book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
-    book_url = models.URLField(max_length=1024, null=True, blank=True, default=None)
+    book_url = models.URLField(max_length=1024, null=True, blank=True, default=None, verbose_name="آدرس اینترنتی")
     publisher = models.ForeignKey(Publisher, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="ناشر")
 
     class Meta:

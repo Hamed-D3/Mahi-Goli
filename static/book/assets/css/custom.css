@@ -139,3 +139,7 @@ img.book-img {
 div.sidebar ul ul ul li.nav-item a.nav-link.active {
     background-color:aqua !important;
 }
+
+.card.card-primary.form-card {
+    width: 100%;
+}
