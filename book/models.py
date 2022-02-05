@@ -1,7 +1,5 @@
-from email.policy import default
-from unicodedata import category
 from django.db import models
-from django.utils.html import format_html
+from django.urls import reverse
 
 # Create your models here.
 def ebook_file_format_validator(file_name) -> bool:
@@ -35,10 +33,6 @@ class AbstractPerson(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.middle_name + ' ' + self.last_name
 
-    # def show_avatar(self):
-    #     full_name = self.first_name + ' ' + self.middle_name + ' ' + self.last_name
-    #     return format_html(f'<img src="{self.avatar.url}" alt="{full_name}" style="width=50px; height=50px; border-radius=50%;" />')
-    # show_avatar.short_description = "پروفایل"
 
 class Author(AbstractPerson):
     
@@ -206,6 +200,9 @@ class PhysicalBook(TextBook):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('book:physicalbook')
 
 
 class ElectronicBook(TextBook):

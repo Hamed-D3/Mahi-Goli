@@ -9,6 +9,7 @@ from .views import (
     TellerList,
     PublisherList,
     CategoryList,
+    PhysicalBookCreate,
 )
 
 app_name = 'book'
@@ -22,4 +23,5 @@ urlpatterns = [
     path('teller/', TellerList.as_view(), name='teller'),
     path('publisher/', PublisherList.as_view(), name='publisher'),
     path('category/', CategoryList.as_view(), name='category'),
+    path('physicalbook/create/', PhysicalBookCreate.as_view(), name='physicalbook_create'),
 ]

@@ -1,0 +1,26 @@
+{% extends 'book/index.html' %}
+{% load static %}
+{% block main%}
+<section class="content">
+<div class="container-fluid">
+	<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">افزودن کتاب فیزیکی</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body table-responsive p-0">
+						<form method="post" enctype="multipart/form-data">{% csrf_token %}
+							{{form.as_p}}
+							<button class="btn btn-success">افزودن کتاب</button>
+						</form>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+	</div>
+</div>
+</section>
+{% endblock %}

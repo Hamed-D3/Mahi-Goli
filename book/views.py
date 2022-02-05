@@ -1,6 +1,6 @@
 import random
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, CreateView
 from .models import (
     PhysicalBook,
     ElectronicBook,
@@ -140,3 +140,9 @@ class CategoryList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class PhysicalBookCreate(CreateView):
+    model = PhysicalBook
+    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
+    template_name = 'book/physicalbook_create_update.html'
