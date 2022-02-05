@@ -20,30 +20,41 @@ def active_book_item(request, *args):
     book_url_names = {'physicalbook': ('physicalbook', 'physicalbook_create'), 
                     'electronicbook': ('electronicbook',), 
                     'audiobook': ('audiobook',), 
-                    'allbook': ('allbook',)}
+                    'allbook': ('allbook',),
+                    'category': ('category',),
+                    'author': ('author',),
+                    'translator': ('translator',),
+                    'teller': ('teller',),
+                    'publisher': ('publisher',)}
 
     parent_url = None
     if url_name not in book_url_names.keys():
         for k, v in book_url_names.items():
             if url_name in v:
                 parent_url = k
-    print(url_name, parent_url)
+    
     if url_name in book_url_names.keys() or parent_url in book_url_names.keys():
         if args[0] == 'menu-open' and args[1] == 'parent':
             return 'menu-open'
         elif args[0] == 'menu-open' and args[1] != 'parent':
             if (url_name in book_url_names.get(url_name, []) and args[1] == url_name) or (parent_url in book_url_names.keys() and args[1] == parent_url):
                 return 'menu-open'
+            else:
+                return ''
         elif args[0] == 'display' and args[1] == 'parent':
             return 'block'
         elif args[0] == 'display' and args[1] != 'parent':
-             if (url_name in book_url_names.get(url_name, []) and args[1] == url_name) or (parent_url in book_url_names.keys() and args[1] == parent_url):
+            if (url_name in book_url_names.get(url_name, []) and args[1] == url_name) or (parent_url in book_url_names.keys() and args[1] == parent_url):
                 return 'block'
+            else:
+                return ''
         elif args[0] == 'active' and args[1] == 'parent':
             return 'active'
         elif args[0] == 'active' and args[1] != 'parent':
             if (url_name in book_url_names.get(url_name, []) and args[1] == url_name) or (parent_url in book_url_names.keys() and args[1] == parent_url):
                 return 'active'
+            else:
+                return ''
     else:
         if args[0] == 'display':
             return 'none'

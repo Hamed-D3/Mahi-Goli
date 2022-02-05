@@ -88,20 +88,75 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            {% sidebar_item request 'category' "دسته‌بندی" "far fa-circle" %}
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'category' %}">
+            <a href="{% url 'book:category' %}" class="nav-link {% active_book_item request 'active' 'category' %}">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                دسته‌بندی
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'category' %};">
+                <li class="nav-item">
+                    {% sidebar_item request 'category' "دسته‌بندی" "far fa-circle" %}
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            {% sidebar_item request 'author' "نویسندگان" "far fa-circle" %}
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'author' %}">
+            <a href="{% url 'book:author' %}" class="nav-link {% active_book_item request 'active' 'author' %}">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                نویسندگان
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'author' %};">
+                <li class="nav-item">
+                    {% sidebar_item request 'author' "نویسندگان" "far fa-circle" %}
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            {% sidebar_item request 'translator' "مترجمین" "far fa-circle" %}
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'translator' %}">
+            <a href="{% url 'book:translator' %}" class="nav-link {% active_book_item request 'active' 'translator' %}">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                مترجمین
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'translator' %};">
+                <li class="nav-item">
+                    {% sidebar_item request 'translator' "مترجمین" "far fa-circle" %}
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            {% sidebar_item request 'teller' "گویندگان" "far fa-circle" %}
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'teller' %}">
+            <a href="{% url 'book:teller' %}" class="nav-link {% active_book_item request 'active' 'teller' %}">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                گویندگان
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'teller' %};">
+                <li class="nav-item">
+                    {% sidebar_item request 'teller' "گویندگان" "far fa-circle" %}
+                </li>
+            </ul>
         </li>
-        <li class="nav-item">
-            {% sidebar_item request 'publisher' "ناشرین" "far fa-circle" %}
+        <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'publisher' %}">
+            <a href="{% url 'book:publisher' %}" class="nav-link {% active_book_item request 'active' 'publisher' %}">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+                ناشرین
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'publisher' %};">
+                <li class="nav-item">
+                    {% sidebar_item request 'publisher' "ناشرین" "far fa-circle" %}
+                </li>
+            </ul>
         </li>
     </ul>
     </nav>
