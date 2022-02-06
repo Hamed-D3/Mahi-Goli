@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body py-4">
                     <form method="post">{% csrf_token %}
-                        <p class="py-2">مطمئنی که میخوای کتاب «{{ object }}» از «{{object.show_author}}» رو حذف کنی؟</p>
+                        <p class="py-2">مطمئنی میخوای کتاب «{{ object }}» از «{{object.show_author}}» رو حذف کنی؟</p>
                         <input type="submit" class="btn btn-danger" value="حذف">
                     </form>
                 </div>
