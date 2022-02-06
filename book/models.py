@@ -201,6 +201,12 @@ class PhysicalBook(TextBook):
     def __str__(self) -> str:
         return self.title
 
+    def show_platform(self):
+        if self.platform:
+            return self.get_platform_display()
+        else:
+            return '-'
+
     def get_absolute_url(self):
         return reverse('book:physicalbook')
 
@@ -225,6 +231,12 @@ class ElectronicBook(TextBook):
 
     def __str__(self) -> str:
         return self.title
+
+    def show_platform(self):
+        if self.platform:
+            return self.get_platform_display()
+        else:
+            return '-'
 
     def get_absolute_url(self):
         return reverse('book:electronicbook')
@@ -266,6 +278,12 @@ class AudioBook(Book):
         else:
             return '-'
     show_teller.short_description = "گویندگان"
+
+    def show_platform(self):
+        if self.platform:
+            return self.get_platform_display()
+        else:
+            return '-'
 
     def get_absolute_url(self):
         return reverse('book:audiobook')
