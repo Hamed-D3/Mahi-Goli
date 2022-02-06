@@ -23,6 +23,7 @@
                     <th>امتیاز</th>
                     <th>وضعیت</th>
                     <th>نوع کتاب</th>
+                    <th>عملیات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -30,7 +31,7 @@
                   <tr>
                     <td>{{ forloop.counter }}</td>
 										<td>{% if book.picture %}<img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}">{% endif %}</td>
-										<td>{{ book.title }}</td>
+										<td><a href="{{ book.update_url }}">{{ book.title }}</a></td>
 										<td>{{ book.show_author }}</td>
 										<td>{{ book.show_translator }}</td>
 										<td>{{ book.show_category }}</td>
@@ -39,6 +40,8 @@
 										<td>{{ book.show_user_rate }}</td>
 										<td>{{ book.status }}</td>
                     <td>{{ book.type }}</td>
+                    <td><a href="{{ book.update_url }}" class="badge badge-primary">ویرایش</a>
+											<a href="{{ book.delete_url }}" class="badge badge-danger">حذف</a></td>
                   </tr>
                   {% endfor %}
                 </tbody>

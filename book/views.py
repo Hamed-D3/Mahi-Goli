@@ -1,6 +1,6 @@
 import random
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     ListView,
     TemplateView,
@@ -40,7 +40,9 @@ class AllBook(TemplateView):
                 'show_user_rate': book.show_user_rate,
                 'status': book.get_read_status_display(),
                 'platform': book.get_platform_display(),
-                'type': 'فیزیکی'
+                'type': 'فیزیکی',
+                'update_url': reverse('book:physicalbook_update', kwargs={'pk':book.pk}),
+                'delete_url': reverse('book:physicalbook_delete', kwargs={'pk':book.pk}),
             })
         
         for book in electronicbook:
@@ -54,7 +56,9 @@ class AllBook(TemplateView):
                 'show_user_rate': book.show_user_rate,
                 'status': book.get_read_status_display(),
                 'platform': book.get_platform_display(),
-                'type': 'الکترونیکی'
+                'type': 'الکترونیکی',
+                'update_url': reverse('book:electronicbook_update', kwargs={'pk':book.pk}),
+                'delete_url': reverse('book:electronicbook_delete', kwargs={'pk':book.pk}),
             })
 
         for book in audiobook:
@@ -68,7 +72,9 @@ class AllBook(TemplateView):
                 'show_user_rate': book.show_user_rate,
                 'status': book.get_listen_status_display(),
                 'platform': book.get_platform_display(),
-                'type': 'صوتی'
+                'type': 'صوتی',
+                'update_url': reverse('book:audiobook_update', kwargs={'pk':book.pk}),
+                'delete_url': reverse('book:audiobook_delete', kwargs={'pk':book.pk}),
             })
 
         random.shuffle(all_book)
