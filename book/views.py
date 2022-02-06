@@ -180,7 +180,7 @@ class ElectronicBookUpdate(UpdateView):
 
 class ElectronicBookDelete(DeleteView):
     model = ElectronicBook
-    success_url = reverse_lazy('book:Electronicbook')
+    success_url = reverse_lazy('book:electronicbook')
     template_name = 'book/book_confirm_delete.html'
 
 
@@ -194,3 +194,9 @@ class AudioBookUpdate(UpdateView):
     model = AudioBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
     template_name = 'book/audiobook_create_update.html'
+
+
+class AudioBookDelete(DeleteView):
+    model = AudioBook
+    success_url = reverse_lazy('book:audiobook')
+    template_name = 'book/book_confirm_delete.html'

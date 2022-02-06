@@ -25,6 +25,7 @@
 										<th>منبع کتاب</th>
 										<th>امتیاز</th>
 										<th>وضعیت</th>
+										<th>عملیات</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -41,6 +42,8 @@
 										<td>{{ book.show_platform }}</td>
 										<td>{{ book.show_user_rate }}</td>
 										<td>{{ book.get_listen_status_display }}</td>
+										<td><a href="{% url 'book:audiobook_update' book.pk %}" class="badge badge-primary">ویرایش</a>
+											<a href="{% url 'book:audiobook_delete' book.pk %}" class="badge badge-danger">حذف</a></td>
 									</tr>
 									{% endfor %}
 								</tbody>

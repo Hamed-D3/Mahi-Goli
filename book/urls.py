@@ -17,6 +17,7 @@ from .views import (
     AudioBookUpdate,
     PhysicalBookDelete,
     ElectronicBookDelete,
+    AudioBookDelete,
 )
 
 app_name = 'book'
@@ -38,4 +39,5 @@ urlpatterns = [
     path('electronicbook/delete/<int:pk>', ElectronicBookDelete.as_view(), name='electronicbook_delete'),
     path('audiobook/create/', AudioBookCreate.as_view(), name='audiobook_create'),
     path('audiobook/update/<int:pk>', AudioBookUpdate.as_view(), name='audiobook_update'),
+    path('audiobook/delete/<int:pk>', AudioBookDelete.as_view(), name='audiobook_delete'),
 ]
