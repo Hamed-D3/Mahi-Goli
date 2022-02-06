@@ -1,0 +1,57 @@
+{% extends 'book/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block main%}
+<section class="content">
+<div class="container-fluid">
+	<div class="row">
+		<div class="card card-primary form-card">
+			<div class="card-header">
+			  	<h3 class="card-title">افزودن کتاب الکتریکی</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<form role="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6">{{ form.picture|as_crispy_field }}</div>
+                        <div class="col-6">{{ form.book_file|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-6">{{ form.title|as_crispy_field }}</div>
+						<div class="col-6">{{ form.category|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-6">{{ form.author|as_crispy_field }}</div>
+						<div class="col-6">{{ form.translator|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-6">{{ form.book_url|as_crispy_field }}</div>
+						<div class="col-6">{{ form.publisher|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-12">{{ form.user_description|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-3">{{ form.read_status|as_crispy_field }}</div>
+						<div class="col-3">{{ form.platform|as_crispy_field }}</div>
+						<div class="col-3">{{ form.pages_readed|as_crispy_field }}</div>
+						<div class="col-3">{{ form.pages|as_crispy_field }}</div>
+					</div>
+					<div class="row">
+						<div class="col-3">{{ form.price|as_crispy_field}}</div>
+						<div class="col-3">{{ form.price_unit|as_crispy_field}}</div>
+						<div class="col-3">{{ form.language_book|as_crispy_field}}</div>
+						<div class="col-3">{{ form.user_rate|as_crispy_field}}</div>
+					</div>
+				</div>
+				<!-- /.card-body -->
+				<div class="card-footer">
+					<button type="submit" class="btn btn-success">افزودن کتاب</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</section>
+{% endblock %}

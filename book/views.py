@@ -146,3 +146,9 @@ class PhysicalBookCreate(CreateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
+
+
+class ElectronicBookCreate(CreateView):
+    model = ElectronicBook
+    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform', 'book_file']
+    template_name = 'book/electronicbook_create_update.html'

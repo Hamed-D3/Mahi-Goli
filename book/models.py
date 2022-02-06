@@ -226,6 +226,9 @@ class ElectronicBook(TextBook):
     def __str__(self) -> str:
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('book:electronicbook')
+
 
 class AudioBook(Book):
     PLATFROM_LIST = (
