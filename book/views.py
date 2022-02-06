@@ -1,3 +1,4 @@
+from multiprocessing import get_context
 import random
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -206,3 +207,14 @@ class AudioBookDelete(DeleteView):
     model = AudioBook
     success_url = reverse_lazy('book:audiobook')
     template_name = 'book/book_confirm_delete.html'
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Author._meta.verbose_name
+        return context

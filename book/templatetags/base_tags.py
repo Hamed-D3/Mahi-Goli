@@ -22,7 +22,7 @@ def active_book_item(request, *args):
                     'audiobook': ('audiobook', 'audiobook_create',), 
                     'allbook': ('allbook',),
                     'category': ('category',),
-                    'author': ('author',),
+                    'author': ('author', 'auhtor_create'),
                     'translator': ('translator',),
                     'teller': ('teller',),
                     'publisher': ('publisher',)}

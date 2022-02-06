@@ -40,6 +40,9 @@ class Author(AbstractPerson):
         verbose_name = "نویسنده"
         verbose_name_plural = "نویسندگان"
 
+    def get_absolute_url(self):
+        return reverse('book:author')
+
 
 class Translator(AbstractPerson):
     
