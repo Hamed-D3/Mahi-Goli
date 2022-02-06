@@ -1,6 +1,11 @@
 import random
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView, CreateView
+from django.views.generic import (
+    ListView,
+    TemplateView,
+    CreateView,
+    UpdateView
+)
 from .models import (
     PhysicalBook,
     ElectronicBook,
@@ -143,6 +148,12 @@ class CategoryList(ListView):
 
 
 class PhysicalBookCreate(CreateView):
+    model = PhysicalBook
+    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
+    template_name = 'book/physicalbook_create_update.html'
+
+
+class PhysicalBookUpdate(UpdateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
