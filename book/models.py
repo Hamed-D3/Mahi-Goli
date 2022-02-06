@@ -266,3 +266,6 @@ class AudioBook(Book):
         else:
             return '-'
     show_teller.short_description = "گویندگان"
+
+    def get_absolute_url(self):
+        return reverse('book:audiobook')
