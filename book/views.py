@@ -218,3 +218,25 @@ class AuthorCreate(CreateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = Author._meta.verbose_name
         return context
+
+
+class TranslatorCreate(CreateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Translator._meta.verbose_name
+        return context
+
+
+class TellerCreate(CreateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Teller._meta.verbose_name
+        return context

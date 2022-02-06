@@ -23,8 +23,8 @@ def active_book_item(request, *args):
                     'allbook': ('allbook',),
                     'category': ('category',),
                     'author': ('author', 'auhtor_create'),
-                    'translator': ('translator',),
-                    'teller': ('teller',),
+                    'translator': ('translator', 'translator_create'),
+                    'teller': ('teller', 'teller_create'),
                     'publisher': ('publisher',)}
 
     parent_url = None

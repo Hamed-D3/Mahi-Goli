@@ -134,6 +134,9 @@
                 <li class="nav-item">
                     {% sidebar_item request 'translator' "مترجمین" "far fa-circle" %}
                 </li>
+                <li class="nav-item">
+                  {% sidebar_item request 'translator_create' "افزودن مترجم" "far fa-circle" %}
+                </li>
             </ul>
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'teller' %}">
@@ -147,6 +150,9 @@
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'teller' %};">
                 <li class="nav-item">
                     {% sidebar_item request 'teller' "گویندگان" "far fa-circle" %}
+                </li>
+                <li class="nav-item">
+                  {% sidebar_item request 'teller_create' "افزودن گوینده" "far fa-circle" %}
                 </li>
             </ul>
         </li>

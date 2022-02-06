@@ -19,6 +19,8 @@ from .views import (
     ElectronicBookDelete,
     AudioBookDelete,
     AuthorCreate,
+    TranslatorCreate,
+    TellerCreate,
 )
 
 app_name = 'book'
@@ -39,7 +41,9 @@ urlpatterns = [
     path('author/', AuthorList.as_view(), name='author'),
     path('author/create/', AuthorCreate.as_view(), name='author_create'),
     path('translator/', TranslatorList.as_view(), name='translator'),
+    path('translator/create', TranslatorCreate.as_view(), name='translator_create'),
     path('teller/', TellerList.as_view(), name='teller'),
+    path('teller/create', TellerCreate.as_view(), name='teller_create'),
     path('publisher/', PublisherList.as_view(), name='publisher'),
     path('category/', CategoryList.as_view(), name='category'),
 ]

@@ -50,12 +50,18 @@ class Translator(AbstractPerson):
         verbose_name = "مترجم"
         verbose_name_plural = "مترجمان"
 
+    def get_absolute_url(self):
+        return reverse('book:translator')
+
 
 class Teller(AbstractPerson):
     
     class Meta:
         verbose_name = "گوینده"
         verbose_name_plural = "گویندگان"
+
+    def get_absolute_url(self):
+        return reverse('book:teller')
 
 
 class Category(models.Model):
