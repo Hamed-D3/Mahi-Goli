@@ -1,10 +1,12 @@
 import random
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import (
     ListView,
     TemplateView,
     CreateView,
-    UpdateView
+    UpdateView,
+    DeleteView,
 )
 from .models import (
     PhysicalBook,
@@ -158,6 +160,11 @@ class PhysicalBookUpdate(UpdateView):
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
 
+
+class PhysicalBookDelete(DeleteView):
+    model = PhysicalBook
+    success_url = reverse_lazy('book:physicalbook')
+    template_name = 'book/book_confirm_delete.html'
 
 class ElectronicBookCreate(CreateView):
     model = ElectronicBook
