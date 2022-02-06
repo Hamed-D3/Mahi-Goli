@@ -32,7 +32,7 @@
 									<tr>
 										<td>{{ forloop.counter }}</td>
 										<td>{% if book.picture %}<img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}">{% endif %}</td>
-										<td>{{ book.title }}</td>
+										<td><a href="{% url 'book:audiobook_update' book.pk %}">{{ book.title }}</a></td>
 										<td>{{ book.show_author }}</td>
 										<td>{{ book.show_translator }}</td>
 										<td>{{ book.show_teller }}</td>

@@ -175,3 +175,9 @@ class AudioBookCreate(CreateView):
     model = AudioBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
     template_name = 'book/audiobook_create_update.html'
+
+
+class AudioBookUpdate(UpdateView):
+    model = AudioBook
+    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
+    template_name = 'book/audiobook_create_update.html'
