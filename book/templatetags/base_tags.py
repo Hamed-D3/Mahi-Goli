@@ -17,9 +17,9 @@ def sidebar_item(request, link_name, content, icon_classes):
 @register.simple_tag
 def active_book_item(request, *args):
     url_name = resolve(request.path_info).url_name
-    book_url_names = {'physicalbook': ('physicalbook', 'physicalbook_create'), 
-                    'electronicbook': ('electronicbook',), 
-                    'audiobook': ('audiobook',), 
+    book_url_names = {'physicalbook': ('physicalbook', 'physicalbook_create',), 
+                    'electronicbook': ('electronicbook', 'electronicbook_create',), 
+                    'audiobook': ('audiobook', 'audiobook_create',), 
                     'allbook': ('allbook',),
                     'category': ('category',),
                     'author': ('author',),
