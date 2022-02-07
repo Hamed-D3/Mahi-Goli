@@ -83,6 +83,9 @@ class Category(models.Model):
             return '-'
     show_parent.short_description = 'زیر دسته'
 
+    def get_absolute_url(self):
+        return reverse('book:category')
+
 
 class Publisher(models.Model):
     title = models.CharField(max_length=256, verbose_name="نام")

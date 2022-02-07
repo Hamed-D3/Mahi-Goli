@@ -314,3 +314,9 @@ class TellerDelete(DeleteView):
         context['model_name'] = Teller._meta.verbose_name
         context['model_name_plural'] = Teller._meta.verbose_name_plural
         return context
+
+
+class CategoryCreate(CreateView):
+    model = Category
+    fields = ['title', 'parent']
+    template_name = 'book/category_create_update.html'

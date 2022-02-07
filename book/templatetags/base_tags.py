@@ -21,7 +21,7 @@ def active_book_item(request, *args):
                     'electronicbook': ('electronicbook', 'electronicbook_create',), 
                     'audiobook': ('audiobook', 'audiobook_create',), 
                     'allbook': ('allbook',),
-                    'category': ('category',),
+                    'category': ('category', 'category_create'),
                     'author': ('author', 'auhtor_create'),
                     'translator': ('translator', 'translator_create'),
                     'teller': ('teller', 'teller_create'),

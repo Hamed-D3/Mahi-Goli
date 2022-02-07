@@ -27,6 +27,7 @@ from .views import (
     AuthorDelete,
     TranslatorDelete,
     TellerDelete,
+    CategoryCreate,
 )
 
 app_name = 'book'
@@ -58,4 +59,5 @@ urlpatterns = [
     path('teller/delete/<int:pk>', TellerDelete.as_view(), name='teller_delete'),
     path('publisher/', PublisherList.as_view(), name='publisher'),
     path('category/', CategoryList.as_view(), name='category'),
+    path('category/create/', CategoryCreate.as_view(), name='category_create'),
 ]
