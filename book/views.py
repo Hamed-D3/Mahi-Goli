@@ -320,3 +320,15 @@ class CategoryCreate(CreateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
+
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    fields = ['title', 'parent']
+    template_name = 'book/category_create_update.html'
+
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('book:category')
+    template_name = 'book/category_confirm_delete.html'

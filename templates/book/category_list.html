@@ -17,6 +17,7 @@
 										<th>ردیف</th>
 										<th>دسته‌بندی ها</th>
 										<th>زیر دسته</th>
+										<th>عملیات</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -25,6 +26,8 @@
 										<td>{{ forloop.counter }}</td>
 										<td>{{ category.title }}</td>
 										<td>{{ category.show_parent }}</td>
+										<td><a href="{% url 'book:category_update' category.pk %}" class="badge badge-primary">ویرایش</a>
+											<a href="{% url 'book:category_delete' category.pk %}" class="badge badge-danger">حذف</a></td>
 									</tr>
 									{% endfor %}
 								</tbody>
