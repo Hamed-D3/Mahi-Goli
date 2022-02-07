@@ -338,3 +338,15 @@ class PublisherCreate(CreateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
+
+
+class PublisherUpdate(UpdateView):
+    model = Publisher
+    fields = ['title', 'url']
+    template_name = 'book/publisher_create_update.html'
+
+
+class PublisherDelete(DeleteView):
+    model = Publisher
+    success_url = reverse_lazy('book:publisher')
+    template_name = 'book/publisher_confirm_delete.html'

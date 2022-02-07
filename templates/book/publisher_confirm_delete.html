@@ -1,0 +1,23 @@
+{% extends 'book/index.html' %}
+{% load static %}
+{% block main%}
+<section class="content">
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-md-8 text-center mx-auto">
+            <div class="card card-danger">
+                <div class="card-header">
+                <h3 class="card-title mb-0 float-left">حذف ناشر</h3>
+                </div>
+                <div class="card-body py-4">
+                    <form method="post">{% csrf_token %}
+                        <p class="py-2">مطمئنی میخوای ناشر «{{ object.title }}» رو حذف کنی؟</p>
+                        <input type="submit" class="btn btn-danger" value="حذف">
+                    </form>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+</section>
+{% endblock %}
