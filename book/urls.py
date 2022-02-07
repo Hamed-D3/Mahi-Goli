@@ -24,6 +24,9 @@ from .views import (
     AuthorUpdate,
     TranslatorUpdate,
     TellerUpdate,
+    AuthorDelete,
+    TranslatorDelete,
+    TellerDelete,
 )
 
 app_name = 'book'
@@ -44,12 +47,15 @@ urlpatterns = [
     path('author/', AuthorList.as_view(), name='author'),
     path('author/create/', AuthorCreate.as_view(), name='author_create'),
     path('author/update/<int:pk>', AuthorUpdate.as_view(), name='author_update'),
+    path('author/delete/<int:pk>', AuthorDelete.as_view(), name='author_delete'),
     path('translator/', TranslatorList.as_view(), name='translator'),
     path('translator/create', TranslatorCreate.as_view(), name='translator_create'),
     path('translator/update/<int:pk>', TranslatorUpdate.as_view(), name='translator_update'),
+    path('translator/delete/<int:pk>', TranslatorDelete.as_view(), name='translator_delete'),
     path('teller/', TellerList.as_view(), name='teller'),
     path('teller/create', TellerCreate.as_view(), name='teller_create'),
     path('teller/update/<int:pk>', TellerUpdate.as_view(), name='teller_update'),
+    path('teller/delete/<int:pk>', TellerDelete.as_view(), name='teller_delete'),
     path('publisher/', PublisherList.as_view(), name='publisher'),
     path('category/', CategoryList.as_view(), name='category'),
 ]

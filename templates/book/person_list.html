@@ -29,7 +29,8 @@
 										<a href="{% url update_url person.pk %}"><td>{{ person.first_name }}</td>
 										<td>{{ person.middle_name }}</td>
 										<td><a href="{% url update_url person.pk %}">{{ person.last_name }}</a></td>
-										<td><a href="{% url update_url person.pk %}" class="badge badge-primary">ویرایش</a></td>
+										<td><a href="{% url update_url person.pk %}" class="badge badge-primary">ویرایش</a>
+											<a href="{% url delete_url person.pk %}" class="badge badge-danger">حذف</a></td>
 									</tr>
 									{% endfor %}
 								</tbody>

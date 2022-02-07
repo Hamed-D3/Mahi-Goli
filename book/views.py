@@ -278,3 +278,39 @@ class TellerUpdate(UpdateView):
         context = super().get_context_data(**kwargs)
         context['model_name'] = Teller._meta.verbose_name
         return context
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('book:author')
+    template_name = 'book/person_confirm_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Author._meta.verbose_name
+        context['model_name_plural'] = Author._meta.verbose_name_plural
+        return context
+
+
+class TranslatorDelete(DeleteView):
+    model = Translator
+    success_url = reverse_lazy('book:translator')
+    template_name = 'book/person_confirm_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Translator._meta.verbose_name
+        context['model_name_plural'] = Translator._meta.verbose_name_plural
+        return context
+
+
+class TellerDelete(DeleteView):
+    model = Teller
+    success_url = reverse_lazy('book:teller')
+    template_name = 'book/person_confirm_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Teller._meta.verbose_name
+        context['model_name_plural'] = Teller._meta.verbose_name_plural
+        return context
