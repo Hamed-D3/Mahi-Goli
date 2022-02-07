@@ -30,6 +30,7 @@ from .views import (
     CategoryCreate,
     CategoryUpdate,
     CategoryDelete,
+    PublisherCreate,
 )
 
 app_name = 'book'
@@ -60,6 +61,7 @@ urlpatterns = [
     path('teller/update/<int:pk>', TellerUpdate.as_view(), name='teller_update'),
     path('teller/delete/<int:pk>', TellerDelete.as_view(), name='teller_delete'),
     path('publisher/', PublisherList.as_view(), name='publisher'),
+    path('publisher/create/', PublisherCreate.as_view(), name='publisher_create'),
     path('category/', CategoryList.as_view(), name='category'),
     path('category/create/', CategoryCreate.as_view(), name='category_create'),
     path('category/update/<int:pk>', CategoryUpdate.as_view(), name='category_update'),

@@ -332,3 +332,9 @@ class CategoryDelete(DeleteView):
     model = Category
     success_url = reverse_lazy('book:category')
     template_name = 'book/category_confirm_delete.html'
+
+
+class PublisherCreate(CreateView):
+    model = Publisher
+    fields = ['title', 'url']
+    template_name = 'book/publisher_create_update.html'

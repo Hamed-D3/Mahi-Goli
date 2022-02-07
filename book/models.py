@@ -103,6 +103,9 @@ class Publisher(models.Model):
         return self.url[:100]
     show_url.short_description = "آدرس اینترنتی"
 
+    def get_absolute_url(self):
+        return reverse('book:publisher')
+
 
 class Book(models.Model):
     LANGUAGE_CHOICES = (
