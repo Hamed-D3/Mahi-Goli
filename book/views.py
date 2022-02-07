@@ -1,4 +1,3 @@
-from multiprocessing import get_context
 import random
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -117,6 +116,8 @@ class AuthorList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "نویسندگان"
+        context['update_url'] = 'book:author_update'
+        context['delete_url'] = 'book:author_delete'
         return context
 
 
@@ -127,6 +128,8 @@ class TranslatorList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "مترجمین"
+        context['update_url'] = 'book:translator_update'
+        context['delete_url'] = 'book:translator_delete'
         return context
 
 
@@ -137,6 +140,8 @@ class TellerList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "گویندگان"
+        context['update_url'] = 'book:teller_update'
+        context['delete_url'] = 'book:teller_delete'
         return context
 
 
@@ -232,6 +237,39 @@ class TranslatorCreate(CreateView):
 
 
 class TellerCreate(CreateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Teller._meta.verbose_name
+        return context
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Author._meta.verbose_name
+        return context
+
+
+class TranslatorUpdate(UpdateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Translator._meta.verbose_name
+        return context
+
+
+class TellerUpdate(UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
