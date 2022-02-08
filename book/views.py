@@ -237,10 +237,11 @@ class AudioBookDelete(DeleteView):
         return super(AudioBookDelete, self).delete(request, *args, **kwargs)
 
 
-class AuthorCreate(CreateView):
+class AuthorCreate(SuccessMessageMixin, CreateView):
     model = Author
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "نویسنده با موفقیت افزوده شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -248,10 +249,11 @@ class AuthorCreate(CreateView):
         return context
 
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(SuccessMessageMixin, UpdateView):
     model = Author
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "نویسنده با موفقیت ویرایش شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -263,6 +265,7 @@ class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('book:author')
     template_name = 'book/person_confirm_delete.html'
+    success_message = "نویسنده با موفقیت حذف شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -270,11 +273,16 @@ class AuthorDelete(DeleteView):
         context['model_name_plural'] = Author._meta.verbose_name_plural
         return context
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(AuthorDelete, self).delete(request, *args, **kwargs)
 
-class TranslatorCreate(CreateView):
+
+class TranslatorCreate(SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "مترجم با موفقیت افزوده شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -282,10 +290,11 @@ class TranslatorCreate(CreateView):
         return context
 
 
-class TranslatorUpdate(UpdateView):
+class TranslatorUpdate(SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "مترجم با موفقیت ویرایش شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -297,6 +306,7 @@ class TranslatorDelete(DeleteView):
     model = Translator
     success_url = reverse_lazy('book:translator')
     template_name = 'book/person_confirm_delete.html'
+    success_message = "مترجم با موفقیت حذف شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -304,11 +314,16 @@ class TranslatorDelete(DeleteView):
         context['model_name_plural'] = Translator._meta.verbose_name_plural
         return context
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(TranslatorDelete, self).delete(request, *args, **kwargs)
 
-class TellerCreate(CreateView):
+
+class TellerCreate(SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "گوینده با موفقیت افزوده شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -316,27 +331,33 @@ class TellerCreate(CreateView):
         return context
 
 
-class TellerUpdate(UpdateView):
+class TellerUpdate(SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
+    success_message = "گوینده با موفقیت ویرایش شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = Teller._meta.verbose_name
         return context
-        
+
 
 class TellerDelete(DeleteView):
     model = Teller
     success_url = reverse_lazy('book:teller')
     template_name = 'book/person_confirm_delete.html'
+    success_message = "گوینده با موفقیت حذف شد"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = Teller._meta.verbose_name
         context['model_name_plural'] = Teller._meta.verbose_name_plural
         return context
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(TranslatorDelete, self).delete(request, *args, **kwargs)
 
 
 class CategoryCreate(CreateView):

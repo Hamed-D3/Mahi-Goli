@@ -3,44 +3,45 @@
 {% block main%}
 <section class="content">
 <div class="container-fluid">
-		<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">{{ model_title }}</h3>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0" style="height: 300px;">
-							<table class="table table-head-fixed">
-								<thead>
-									<tr>
-										<th>ردیف</th>
-										<th>تصویر پروفایل</th>
-										<th>نام</th>
-										<th>نام میانی</th>
-										<th>نام خانوادگی</th>
-										<th>عملیات</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for person in object_list %}
-										<td>{{ forloop.counter }}</td>
-										<td>{% if person.avatar %}<img class= person-img" src="{{ person.avatar.url }}" alt="{{ person.title }}">{% endif %}</td>
-										<a href="{% url update_url person.pk %}"><td>{{ person.first_name }}</td>
-										<td>{{ person.middle_name }}</td>
-										<td><a href="{% url update_url person.pk %}">{{ person.last_name }}</a></td>
-										<td><a href="{% url update_url person.pk %}" class="badge badge-primary">ویرایش</a>
-											<a href="{% url delete_url person.pk %}" class="badge badge-danger">حذف</a></td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
+	{% include 'book/messages.html' %}
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">{{ model_title }}</h3>
 				</div>
+				<!-- /.card-header -->
+				<div class="card-body table-responsive p-0" style="height: 300px;">
+					<table class="table table-head-fixed">
+						<thead>
+							<tr>
+								<th>ردیف</th>
+								<th>تصویر پروفایل</th>
+								<th>نام</th>
+								<th>نام میانی</th>
+								<th>نام خانوادگی</th>
+								<th>عملیات</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for person in object_list %}
+								<td>{{ forloop.counter }}</td>
+								<td>{% if person.avatar %}<img class= person-img" src="{{ person.avatar.url }}" alt="{{ person.title }}">{% endif %}</td>
+								<a href="{% url update_url person.pk %}"><td>{{ person.first_name }}</td>
+								<td>{{ person.middle_name }}</td>
+								<td><a href="{% url update_url person.pk %}">{{ person.last_name }}</a></td>
+								<td><a href="{% url update_url person.pk %}" class="badge badge-primary">ویرایش</a>
+									<a href="{% url delete_url person.pk %}" class="badge badge-danger">حذف</a></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
 		</div>
+	</div>
 </div>
 </section>
 {% endblock %}
