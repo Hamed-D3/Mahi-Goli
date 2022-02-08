@@ -3,7 +3,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from book.forms import PhysicalBookCreateUpdateForm
+from book.forms import (
+    AudioBookCreateUpdateForm,
+    PhysicalBookCreateUpdateForm,
+    ElectronicBookCreateUpdateForm,
+)
 from django.views.generic import (
     ListView,
     TemplateView,
@@ -190,14 +194,14 @@ class PhysicalBookDelete(SuccessMessageMixin, DeleteView):
 
 class ElectronicBookCreate(SuccessMessageMixin, CreateView):
     model = ElectronicBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform', 'book_file']
+    form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت افزوده شد"
 
 
 class ElectronicBookUpdate(SuccessMessageMixin, UpdateView):
     model = ElectronicBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform', 'book_file']
+    form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت ویرایش شد"
 
@@ -215,14 +219,14 @@ class ElectronicBookDelete(DeleteView):
 
 class AudioBookCreate(SuccessMessageMixin, CreateView):
     model = AudioBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
+    form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت افزوده شد"
 
 
 class AudioBookUpdate(SuccessMessageMixin, UpdateView):
     model = AudioBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
+    form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت ویرایش شد"
 
