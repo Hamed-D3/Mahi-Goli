@@ -212,22 +212,29 @@ class ElectronicBookDelete(DeleteView):
         return super(ElectronicBookDelete, self).delete(request, *args, **kwargs)
 
 
-class AudioBookCreate(CreateView):
+class AudioBookCreate(SuccessMessageMixin, CreateView):
     model = AudioBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
     template_name = 'book/audiobook_create_update.html'
+    success_message = "کتاب صوتی با موفقیت افزوده شد"
 
 
-class AudioBookUpdate(UpdateView):
+class AudioBookUpdate(SuccessMessageMixin, UpdateView):
     model = AudioBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher',  'teller', 'episode', 'season', 'listen_status', 'platform', 'book_file']
     template_name = 'book/audiobook_create_update.html'
+    success_message = "کتاب صوتی با موفقیت ویرایش شد"
 
 
 class AudioBookDelete(DeleteView):
     model = AudioBook
     success_url = reverse_lazy('book:audiobook')
     template_name = 'book/book_confirm_delete.html'
+    success_message = "کتاب صوتی با موفقیت حذف شد"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(AudioBookDelete, self).delete(request, *args, **kwargs)
 
 
 class AuthorCreate(CreateView):
