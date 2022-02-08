@@ -360,37 +360,51 @@ class TellerDelete(DeleteView):
         return super(TranslatorDelete, self).delete(request, *args, **kwargs)
 
 
-class CategoryCreate(CreateView):
+class CategoryCreate(SuccessMessageMixin, CreateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
+    success_message = "دسته‌بندی با موفقیت افزوده شد"
 
 
-class CategoryUpdate(UpdateView):
+class CategoryUpdate(SuccessMessageMixin, UpdateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
+    success_message = "دسته‌بندی با موفقیت ویرایش شد"
 
 
 class CategoryDelete(DeleteView):
     model = Category
     success_url = reverse_lazy('book:category')
     template_name = 'book/category_confirm_delete.html'
+    success_message = "دسته‌بندی با موفقیت حذف شد"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(CategoryDelete, self).delete(request, *args, **kwargs)
 
 
-class PublisherCreate(CreateView):
+class PublisherCreate(SuccessMessageMixin, CreateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
+    success_message = "ناشر با موفقیت افزوده شد"
 
 
-class PublisherUpdate(UpdateView):
+class PublisherUpdate(SuccessMessageMixin, UpdateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
+    success_message = "ناشر با موفقیت ویرایش شد"
 
 
 class PublisherDelete(DeleteView):
     model = Publisher
     success_url = reverse_lazy('book:publisher')
     template_name = 'book/publisher_confirm_delete.html'
+    success_message = "ناشر با موفقیت حذف شد"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(PublisherDelete, self).delete(request, *args, **kwargs)
