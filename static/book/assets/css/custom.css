@@ -128,7 +128,7 @@
 
 /* my custom css code */
 div.card-header .card-title {
-    float: initial;
+    float: initial !important;
     text-align: center;
 }
 
@@ -137,7 +137,7 @@ img.book-img {
 }
 
 div.sidebar ul ul ul li.nav-item a.nav-link.active {
-    background-color:aqua !important;
+    background-color:#838587 !important;
 }
 
 .card.card-primary.form-card {
