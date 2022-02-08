@@ -143,3 +143,15 @@ div.sidebar ul ul ul li.nav-item a.nav-link.active {
 .card.card-primary.form-card {
     width: 100%;
 }
+
+footer.main-footer {
+    text-align: center;
+}
+
+.card-body.table-responsive.p-0 {
+    height: 74vh !important;
+}
+
+tbody tr {
+    height: 125px;
+}
