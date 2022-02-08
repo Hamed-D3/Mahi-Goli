@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from book.forms import PhysicalBookCreateUpdateForm
 from django.views.generic import (
     ListView,
     TemplateView,
@@ -165,14 +166,14 @@ class CategoryList(ListView):
 
 class PhysicalBookCreate(SuccessMessageMixin, CreateView):
     model = PhysicalBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
+    form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت افزوده شد"
 
 
 class PhysicalBookUpdate(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
-    fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
+    form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت ویرایش شد"
 

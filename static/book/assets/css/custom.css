@@ -155,3 +155,7 @@ footer.main-footer {
 tbody tr {
     height: 125px;
 }
+
+#div_id_picture.form-group div img.book-picture {
+    height: 100px !important;
+}
