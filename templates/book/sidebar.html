@@ -36,7 +36,7 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'parent' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'allbook' "تمامی کتاب‌ها" "fas fa-book" %}
+                    {% sidebar_item request 'allbook' "تمامی کتاب‌ها" "fa fa-list" %}
                 </li>
                 <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'physicalbook' %}">
                     <a href="{% url 'book:physicalbook' %}" class="nav-link {% active_book_item request 'active' 'physicalbook' %}">
@@ -48,10 +48,10 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'physicalbook' %};">
                         <li class="nav-item">
-                            {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fas fa-book-open" %}
+                            {% sidebar_item request 'physicalbook' "کتاب‌های فیزیکی" "fa fa-list" %}
                         </li>
                         <li class="nav-item">
-                            {% sidebar_item request 'physicalbook_create' "افزودن کتاب‌ فیزیکی" "fas fa-book-open" %}
+                            {% sidebar_item request 'physicalbook_create' "افزودن کتاب‌ فیزیکی" "fa fa-edit" %}
                         </li>
                     </ul>
                 </li>
@@ -65,10 +65,10 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'electronicbook' %};">
                         <li class="nav-item">
-                            {% sidebar_item request 'electronicbook' "کتاب‌های الکترونیکی" "fas fa-book" %}
+                            {% sidebar_item request 'electronicbook' "کتاب‌های الکترونیکی" "fa fa-list" %}
                         </li>
                         <li class="nav-item">
-                          {% sidebar_item request 'electronicbook_create' "افزودن کتاب‌ الکترونیکی" "fas fa-book" %}
+                          {% sidebar_item request 'electronicbook_create' "افزودن کتاب‌ الکترونیکی" "fa fa-edit" %}
                       </li>
                     </ul>
                 </li>
@@ -82,10 +82,10 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'audiobook' %};">
                         <li class="nav-item">
-                          	{% sidebar_item request 'audiobook' "کتاب‌های صوتی" "fas fa-headphones-alt" %}
+                          	{% sidebar_item request 'audiobook' "کتاب‌های صوتی" "fa fa-list" %}
                         </li>
                         <li class="nav-item">
-                        	{% sidebar_item request 'audiobook_create' "افزودن کتاب صوتی" "fas fa-headphones-alt" %}
+                        	{% sidebar_item request 'audiobook_create' "افزودن کتاب صوتی" "fa fa-edit" %}
                         </li>
                     </ul>
                 </li>
@@ -93,7 +93,7 @@
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'category' %}">
             <a href="{% url 'book:category' %}" class="nav-link {% active_book_item request 'active' 'category' %}">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fa fa-list-alt"></i>
               <p>
                 دسته‌بندی
                 <i class="right fas fa-angle-left"></i>
@@ -101,16 +101,16 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'category' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'category' "دسته‌بندی" "far fa-circle" %}
+                    {% sidebar_item request 'category' "دسته‌بندی" "fa fa-list" %}
                 </li>
                 <li class="nav-item">
-                  {% sidebar_item request 'category_create' "افزودن دسته‌بندی" "far fa-circle" %}
+                  {% sidebar_item request 'category_create' "افزودن دسته‌بندی" "fa fa-edit" %}
               </li>
             </ul>
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'author' %}">
             <a href="{% url 'book:author' %}" class="nav-link {% active_book_item request 'active' 'author' %}">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fas fa-pen"></i>
               <p>
                 نویسندگان
                 <i class="right fas fa-angle-left"></i>
@@ -118,16 +118,16 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'author' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'author' "نویسندگان" "far fa-circle" %}
+                    {% sidebar_item request 'author' "نویسندگان" "fa fa-list" %}
                 </li>
                 <li class="nav-item">
-                    {% sidebar_item request 'author_create' "افزودن نویسنده" "far fa-circle" %}
+                    {% sidebar_item request 'author_create' "افزودن نویسنده" "fa fa-edit" %}
               </li>
             </ul>
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'translator' %}">
             <a href="{% url 'book:translator' %}" class="nav-link {% active_book_item request 'active' 'translator' %}">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fas fa-language"></i>
               <p>
                 مترجمین
                 <i class="right fas fa-angle-left"></i>
@@ -135,16 +135,16 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'translator' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'translator' "مترجمین" "far fa-circle" %}
+                    {% sidebar_item request 'translator' "مترجمین" "fa fa-list" %}
                 </li>
                 <li class="nav-item">
-                  {% sidebar_item request 'translator_create' "افزودن مترجم" "far fa-circle" %}
+                  {% sidebar_item request 'translator_create' "افزودن مترجم" "fa fa-edit" %}
                 </li>
             </ul>
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'teller' %}">
             <a href="{% url 'book:teller' %}" class="nav-link {% active_book_item request 'active' 'teller' %}">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fas fa-microphone-alt"></i>
               <p>
                 گویندگان
                 <i class="right fas fa-angle-left"></i>
@@ -152,16 +152,16 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'teller' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'teller' "گویندگان" "far fa-circle" %}
+                    {% sidebar_item request 'teller' "گویندگان" "fa fa-list" %}
                 </li>
                 <li class="nav-item">
-                  {% sidebar_item request 'teller_create' "افزودن گوینده" "far fa-circle" %}
+                  {% sidebar_item request 'teller_create' "افزودن گوینده" "fa fa-edit" %}
                 </li>
             </ul>
         </li>
         <li class="nav-item has-treeview {% active_book_item request 'menu-open' 'publisher' %}">
             <a href="{% url 'book:publisher' %}" class="nav-link {% active_book_item request 'active' 'publisher' %}">
-              <i class="nav-icon far fa-circle"></i>
+              <i class="nav-icon fas fa-print"></i>
               <p>
                 ناشرین
                 <i class="right fas fa-angle-left"></i>
@@ -169,10 +169,10 @@
             </a>
             <ul class="nav nav-treeview" style="display: {% active_book_item request 'display' 'publisher' %};">
                 <li class="nav-item">
-                    {% sidebar_item request 'publisher' "ناشرین" "far fa-circle" %}
+                    {% sidebar_item request 'publisher' "ناشرین" "fa fa-list" %}
                 </li>
                 <li class="nav-item">
-                  {% sidebar_item request 'publisher_create' "افزودن ناشر" "far fa-circle" %}
+                  {% sidebar_item request 'publisher_create' "افزودن ناشر" "fa fa-edit" %}
                 </li>
             </ul>
         </li>
