@@ -1,6 +1,8 @@
 import random
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import (
     ListView,
     TemplateView,
@@ -161,22 +163,31 @@ class CategoryList(ListView):
         return context
 
 
-class PhysicalBookCreate(CreateView):
+class PhysicalBookCreate(SuccessMessageMixin, CreateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
+    success_url = reverse_lazy("book:physicalbook")
+    success_message = "کتاب فیزیکی با موفقیت افزوده شد"
 
 
-class PhysicalBookUpdate(UpdateView):
+class PhysicalBookUpdate(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
+    success_url = reverse_lazy("book:physicalbook")
+    success_message = "کتاب فیزیکی با موفقیت ویرایش شد"
 
 
-class PhysicalBookDelete(DeleteView):
+class PhysicalBookDelete(SuccessMessageMixin, DeleteView):
     model = PhysicalBook
     success_url = reverse_lazy('book:physicalbook')
     template_name = 'book/book_confirm_delete.html'
+    success_message = "کتاب فیزیکی با موفقیت حذف شد"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(PhysicalBookDelete, self).delete(request, *args, **kwargs)
 
 class ElectronicBookCreate(CreateView):
     model = ElectronicBook

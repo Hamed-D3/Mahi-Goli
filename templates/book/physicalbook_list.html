@@ -3,6 +3,18 @@
 {% block main%}
 <section class="content">
 <div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			{% if messages %}
+				{% for message in messages %}
+				<p style="display: flex !important;width: fit-content;vertical-align: middle;" class="alert alert-dismissable {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+					<button style="margin-left: 5px;" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<span>{{ message }}</span>
+				</p>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
 		<div class="row">
 				<div class="col-12">
 					<div class="card">
