@@ -3,55 +3,56 @@
 {% block main%}
 <section class="content">
 <div class="container-fluid">
-		<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">کتب الکترونیکی</h3>
-						</div>
-						<!-- /.card-header -->
-						<div class="card-body table-responsive p-0" style="height: 300px;">
-							<table class="table table-head-fixed">
-								<thead>
-									<tr>
-										<th>ردیف</th>
-										<th>تصویر جلد</th>
-										<th>نام کتاب</th>
-										<th>نویسندگان</th>
-										<th>مترجمین</th>
-										<th>دسته‌بندی</th>
-										<th>ناشر</th>
-										<th>منبع کتاب</th>
-										<th>امتیاز</th>
-										<th>وضعیت</th>
-										<th>عملیات</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for book in object_list %}
-									<tr>
-										<td>{{ forloop.counter }}</td>
-										<td>{% if book.picture %}<img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}">{% endif %}</td>
-										<td><a href="{% url 'book:electronicbook_update' book.pk %}">{{ book.title }}</a></td>
-										<td>{{ book.show_author }}</td>
-										<td>{{ book.show_translator }}</td>
-										<td>{{ book.show_category }}</td>
-										<td>{{ book.show_publisher }}</td>
-										<td>{{ book.show_platform }}</td>
-										<td>{{ book.show_user_rate }}</td>
-										<td>{{ book.get_read_status_display }}</td>
-										<td><a href="{% url 'book:electronicbook_update' book.pk %}" class="badge badge-primary">ویرایش</a>
-											<a href="{% url 'book:electronicbook_delete' book.pk %}" class="badge badge-danger">حذف</a></td>
-									</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						</div>
-						<!-- /.card-body -->
+	{% include 'book/messages.html' %}
+	<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">کتب الکترونیکی</h3>
 					</div>
-					<!-- /.card -->
+					<!-- /.card-header -->
+					<div class="card-body table-responsive p-0" style="height: 300px;">
+						<table class="table table-head-fixed">
+							<thead>
+								<tr>
+									<th>ردیف</th>
+									<th>تصویر جلد</th>
+									<th>نام کتاب</th>
+									<th>نویسندگان</th>
+									<th>مترجمین</th>
+									<th>دسته‌بندی</th>
+									<th>ناشر</th>
+									<th>منبع کتاب</th>
+									<th>امتیاز</th>
+									<th>وضعیت</th>
+									<th>عملیات</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for book in object_list %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{% if book.picture %}<img class="book-img" src="{{book.picture.url}}" alt="{{ book.title }}">{% endif %}</td>
+									<td><a href="{% url 'book:electronicbook_update' book.pk %}">{{ book.title }}</a></td>
+									<td>{{ book.show_author }}</td>
+									<td>{{ book.show_translator }}</td>
+									<td>{{ book.show_category }}</td>
+									<td>{{ book.show_publisher }}</td>
+									<td>{{ book.show_platform }}</td>
+									<td>{{ book.show_user_rate }}</td>
+									<td>{{ book.get_read_status_display }}</td>
+									<td><a href="{% url 'book:electronicbook_update' book.pk %}" class="badge badge-primary">ویرایش</a>
+										<a href="{% url 'book:electronicbook_delete' book.pk %}" class="badge badge-danger">حذف</a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
 				</div>
-		</div>
+				<!-- /.card -->
+			</div>
+	</div>
 </div>
 </section>
 {% endblock %}

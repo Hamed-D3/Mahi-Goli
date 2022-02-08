@@ -167,7 +167,6 @@ class PhysicalBookCreate(SuccessMessageMixin, CreateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
-    success_url = reverse_lazy("book:physicalbook")
     success_message = "کتاب فیزیکی با موفقیت افزوده شد"
 
 
@@ -175,7 +174,6 @@ class PhysicalBookUpdate(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform']
     template_name = 'book/physicalbook_create_update.html'
-    success_url = reverse_lazy("book:physicalbook")
     success_message = "کتاب فیزیکی با موفقیت ویرایش شد"
 
 
@@ -189,22 +187,29 @@ class PhysicalBookDelete(SuccessMessageMixin, DeleteView):
         messages.success(self.request, self.success_message)
         return super(PhysicalBookDelete, self).delete(request, *args, **kwargs)
 
-class ElectronicBookCreate(CreateView):
+class ElectronicBookCreate(SuccessMessageMixin, CreateView):
     model = ElectronicBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform', 'book_file']
     template_name = 'book/electronicbook_create_update.html'
+    success_message = "کتاب الکترونیکی با موفقیت افزوده شد"
 
 
-class ElectronicBookUpdate(UpdateView):
+class ElectronicBookUpdate(SuccessMessageMixin, UpdateView):
     model = ElectronicBook
     fields = ['picture', 'title', 'author', 'translator', 'language_book', 'user_rate', 'category', 'price', 'price_unit', 'user_description', 'book_url', 'publisher', 'pages_readed', 'pages', 'read_status', 'platform', 'book_file']
     template_name = 'book/electronicbook_create_update.html'
+    success_message = "کتاب الکترونیکی با موفقیت ویرایش شد"
 
 
 class ElectronicBookDelete(DeleteView):
     model = ElectronicBook
     success_url = reverse_lazy('book:electronicbook')
     template_name = 'book/book_confirm_delete.html'
+    success_message = "کتاب الکترونیکی با موفقیت حذف شد"
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(ElectronicBookDelete, self).delete(request, *args, **kwargs)
 
 
 class AudioBookCreate(CreateView):
