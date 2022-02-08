@@ -248,28 +248,6 @@ class AuthorCreate(CreateView):
         return context
 
 
-class TranslatorCreate(CreateView):
-    model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
-    template_name = 'book/person_create_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['model_name'] = Translator._meta.verbose_name
-        return context
-
-
-class TellerCreate(CreateView):
-    model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
-    template_name = 'book/person_create_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['model_name'] = Teller._meta.verbose_name
-        return context
-
-
 class AuthorUpdate(UpdateView):
     model = Author
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
@@ -278,28 +256,6 @@ class AuthorUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_name'] = Author._meta.verbose_name
-        return context
-
-
-class TranslatorUpdate(UpdateView):
-    model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
-    template_name = 'book/person_create_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['model_name'] = Translator._meta.verbose_name
-        return context
-
-
-class TellerUpdate(UpdateView):
-    model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
-    template_name = 'book/person_create_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['model_name'] = Teller._meta.verbose_name
         return context
 
 
@@ -315,6 +271,28 @@ class AuthorDelete(DeleteView):
         return context
 
 
+class TranslatorCreate(CreateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Translator._meta.verbose_name
+        return context
+
+
+class TranslatorUpdate(UpdateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Translator._meta.verbose_name
+        return context
+
+
 class TranslatorDelete(DeleteView):
     model = Translator
     success_url = reverse_lazy('book:translator')
@@ -326,6 +304,28 @@ class TranslatorDelete(DeleteView):
         context['model_name_plural'] = Translator._meta.verbose_name_plural
         return context
 
+
+class TellerCreate(CreateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Teller._meta.verbose_name
+        return context
+
+
+class TellerUpdate(UpdateView):
+    model = Translator
+    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    template_name = 'book/person_create_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = Teller._meta.verbose_name
+        return context
+        
 
 class TellerDelete(DeleteView):
     model = Teller
