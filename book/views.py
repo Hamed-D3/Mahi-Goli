@@ -27,7 +27,11 @@ from .models import (
 )
 
 # Create your views here.
-class AllBook(TemplateView):
+class HomeView(TemplateView):
+    template_name = 'book/index.html'
+
+
+class AllBookView(TemplateView):
 
     def get(self, request, **kwargs):
         all_book = []
@@ -89,10 +93,10 @@ class AllBook(TemplateView):
             'all_book': all_book
         }
 
-        return render(request, 'book/index.html', context)
+        return render(request, 'book/books.html', context)
 
 
-class PhysicalBookList(ListView):
+class PhysicalBookListView(ListView):
     model = PhysicalBook
     
     def get_context_data(self, **kwargs):
@@ -100,7 +104,7 @@ class PhysicalBookList(ListView):
         return context
 
 
-class ElectronicBookList(ListView):
+class ElectronicBookListView(ListView):
     model = ElectronicBook
 
     def get_context_data(self, **kwargs):
@@ -108,7 +112,7 @@ class ElectronicBookList(ListView):
         return context
 
 
-class AudioBookList(ListView):
+class AudioBookListView(ListView):
     model = AudioBook
 
     def get_context_data(self, **kwargs):
@@ -116,7 +120,7 @@ class AudioBookList(ListView):
         return context
 
 
-class AuthorList(ListView):
+class AuthorListView(ListView):
     model = Author
     template_name = 'book/person_list.html'
 
@@ -128,7 +132,7 @@ class AuthorList(ListView):
         return context
 
 
-class TranslatorList(ListView):
+class TranslatorListView(ListView):
     model = Translator
     template_name = 'book/person_list.html'
 
@@ -140,7 +144,7 @@ class TranslatorList(ListView):
         return context
 
 
-class TellerList(ListView):
+class TellerListView(ListView):
     model = Teller
     template_name = 'book/person_list.html'
 
@@ -152,7 +156,7 @@ class TellerList(ListView):
         return context
 
 
-class PublisherList(ListView):
+class PublisherListView(ListView):
     model = Publisher
 
     def get_context_data(self, **kwargs):
@@ -160,7 +164,7 @@ class PublisherList(ListView):
         return context
 
 
-class CategoryList(ListView):
+class CategoryListView(ListView):
     model = Category
 
     def get_context_data(self, **kwargs):
@@ -168,21 +172,21 @@ class CategoryList(ListView):
         return context
 
 
-class PhysicalBookCreate(SuccessMessageMixin, CreateView):
+class PhysicalBookCreateView(SuccessMessageMixin, CreateView):
     model = PhysicalBook
     form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت افزوده شد"
 
 
-class PhysicalBookUpdate(SuccessMessageMixin, UpdateView):
+class PhysicalBookUpdateView(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
     form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت ویرایش شد"
 
 
-class PhysicalBookDelete(SuccessMessageMixin, DeleteView):
+class PhysicalBookDeleteView(SuccessMessageMixin, DeleteView):
     model = PhysicalBook
     success_url = reverse_lazy('book:physicalbook')
     template_name = 'book/book_confirm_delete.html'
@@ -192,21 +196,22 @@ class PhysicalBookDelete(SuccessMessageMixin, DeleteView):
         messages.success(self.request, self.success_message)
         return super(PhysicalBookDelete, self).delete(request, *args, **kwargs)
 
-class ElectronicBookCreate(SuccessMessageMixin, CreateView):
+
+class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
     model = ElectronicBook
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت افزوده شد"
 
 
-class ElectronicBookUpdate(SuccessMessageMixin, UpdateView):
+class ElectronicBookUpdateView(SuccessMessageMixin, UpdateView):
     model = ElectronicBook
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت ویرایش شد"
 
 
-class ElectronicBookDelete(DeleteView):
+class ElectronicBookDeleteView(DeleteView):
     model = ElectronicBook
     success_url = reverse_lazy('book:electronicbook')
     template_name = 'book/book_confirm_delete.html'
@@ -217,21 +222,21 @@ class ElectronicBookDelete(DeleteView):
         return super(ElectronicBookDelete, self).delete(request, *args, **kwargs)
 
 
-class AudioBookCreate(SuccessMessageMixin, CreateView):
+class AudioBookCreateView(SuccessMessageMixin, CreateView):
     model = AudioBook
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت افزوده شد"
 
 
-class AudioBookUpdate(SuccessMessageMixin, UpdateView):
+class AudioBookUpdateView(SuccessMessageMixin, UpdateView):
     model = AudioBook
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت ویرایش شد"
 
 
-class AudioBookDelete(DeleteView):
+class AudioBookDeleteView(DeleteView):
     model = AudioBook
     success_url = reverse_lazy('book:audiobook')
     template_name = 'book/book_confirm_delete.html'
@@ -242,7 +247,7 @@ class AudioBookDelete(DeleteView):
         return super(AudioBookDelete, self).delete(request, *args, **kwargs)
 
 
-class AuthorCreate(SuccessMessageMixin, CreateView):
+class AuthorCreateView(SuccessMessageMixin, CreateView):
     model = Author
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -254,7 +259,7 @@ class AuthorCreate(SuccessMessageMixin, CreateView):
         return context
 
 
-class AuthorUpdate(SuccessMessageMixin, UpdateView):
+class AuthorUpdateView(SuccessMessageMixin, UpdateView):
     model = Author
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -266,7 +271,7 @@ class AuthorUpdate(SuccessMessageMixin, UpdateView):
         return context
 
 
-class AuthorDelete(DeleteView):
+class AuthorDeleteView(DeleteView):
     model = Author
     success_url = reverse_lazy('book:author')
     template_name = 'book/person_confirm_delete.html'
@@ -283,7 +288,7 @@ class AuthorDelete(DeleteView):
         return super(AuthorDelete, self).delete(request, *args, **kwargs)
 
 
-class TranslatorCreate(SuccessMessageMixin, CreateView):
+class TranslatorCreateView(SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -295,7 +300,7 @@ class TranslatorCreate(SuccessMessageMixin, CreateView):
         return context
 
 
-class TranslatorUpdate(SuccessMessageMixin, UpdateView):
+class TranslatorUpdateView(SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -307,7 +312,7 @@ class TranslatorUpdate(SuccessMessageMixin, UpdateView):
         return context
 
 
-class TranslatorDelete(DeleteView):
+class TranslatorDeleteView(DeleteView):
     model = Translator
     success_url = reverse_lazy('book:translator')
     template_name = 'book/person_confirm_delete.html'
@@ -324,7 +329,7 @@ class TranslatorDelete(DeleteView):
         return super(TranslatorDelete, self).delete(request, *args, **kwargs)
 
 
-class TellerCreate(SuccessMessageMixin, CreateView):
+class TellerCreateView(SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -336,7 +341,7 @@ class TellerCreate(SuccessMessageMixin, CreateView):
         return context
 
 
-class TellerUpdate(SuccessMessageMixin, UpdateView):
+class TellerUpdateView(SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'middle_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -348,7 +353,7 @@ class TellerUpdate(SuccessMessageMixin, UpdateView):
         return context
 
 
-class TellerDelete(DeleteView):
+class TellerDeleteView(DeleteView):
     model = Teller
     success_url = reverse_lazy('book:teller')
     template_name = 'book/person_confirm_delete.html'
@@ -365,21 +370,21 @@ class TellerDelete(DeleteView):
         return super(TranslatorDelete, self).delete(request, *args, **kwargs)
 
 
-class CategoryCreate(SuccessMessageMixin, CreateView):
+class CategoryCreateView(SuccessMessageMixin, CreateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
     success_message = "دسته‌بندی با موفقیت افزوده شد"
 
 
-class CategoryUpdate(SuccessMessageMixin, UpdateView):
+class CategoryUpdateView(SuccessMessageMixin, UpdateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
     success_message = "دسته‌بندی با موفقیت ویرایش شد"
 
 
-class CategoryDelete(DeleteView):
+class CategoryDeleteView(DeleteView):
     model = Category
     success_url = reverse_lazy('book:category')
     template_name = 'book/category_confirm_delete.html'
@@ -390,21 +395,21 @@ class CategoryDelete(DeleteView):
         return super(CategoryDelete, self).delete(request, *args, **kwargs)
 
 
-class PublisherCreate(SuccessMessageMixin, CreateView):
+class PublisherCreateView(SuccessMessageMixin, CreateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
     success_message = "ناشر با موفقیت افزوده شد"
 
 
-class PublisherUpdate(SuccessMessageMixin, UpdateView):
+class PublisherUpdateView(SuccessMessageMixin, UpdateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
     success_message = "ناشر با موفقیت ویرایش شد"
 
 
-class PublisherDelete(DeleteView):
+class PublisherDeleteView(DeleteView):
     model = Publisher
     success_url = reverse_lazy('book:publisher')
     template_name = 'book/publisher_confirm_delete.html'
