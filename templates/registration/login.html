@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+<h2>ورود</h2>
+<form method="post">{% csrf_token %}
+  {{ form|crispy }}
+  <button type="submit">ورود</button>
+</form>
+<a href="{% url 'accounts:signup' %}">ثبت نام</a>

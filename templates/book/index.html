@@ -3,11 +3,19 @@
 {% block main %}
 <div class="w-100 h-100">
     <div class="row text-center align-middle mx-auto my-auto">
-        <div class="col-12">
+        <div class="col-10">
             <h1>
                 Mahi Goli Home Page
             </h1>
             <a href="{% url 'book:allbook' %}">رفتن به داشبورد ماهی گلی</a>
+        </div>
+        <div class="col-2">
+            {% if user.is_authenticated %}
+            <p>hello {{user.first_name}}</p>
+            {% else %}
+            <p>سلام ناشناس</p>
+            <a href="{% url 'accounts:signup' %}">ثبت نام</a>/<a href="{% url 'accounts:login' %}">ورود</a>
+            {% endif %}
         </div>
     </div>
 </div>
