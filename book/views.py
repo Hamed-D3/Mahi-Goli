@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from book.forms import (
     AudioBookCreateUpdateForm,
     PhysicalBookCreateUpdateForm,
@@ -31,7 +32,7 @@ class HomeView(TemplateView):
     template_name = 'book/index.html'
 
 
-class AllBookView(TemplateView):
+class AllBookView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, **kwargs):
         all_book = []
@@ -96,7 +97,7 @@ class AllBookView(TemplateView):
         return render(request, 'book/books.html', context)
 
 
-class PhysicalBookListView(ListView):
+class PhysicalBookListView(LoginRequiredMixin, ListView):
     model = PhysicalBook
 
     def get_queryset(self):
@@ -107,7 +108,7 @@ class PhysicalBookListView(ListView):
         return context
 
 
-class ElectronicBookListView(ListView):
+class ElectronicBookListView(LoginRequiredMixin, ListView):
     model = ElectronicBook
 
     def get_queryset(self):
@@ -118,7 +119,7 @@ class ElectronicBookListView(ListView):
         return context
 
 
-class AudioBookListView(ListView):
+class AudioBookListView(LoginRequiredMixin, ListView):
     model = AudioBook
 
     def get_queryset(self):
@@ -129,7 +130,7 @@ class AudioBookListView(ListView):
         return context
 
 
-class AuthorListView(ListView):
+class AuthorListView(LoginRequiredMixin, ListView):
     model = Author
     template_name = 'book/person_list.html'
 
@@ -144,7 +145,7 @@ class AuthorListView(ListView):
         return context
 
 
-class TranslatorListView(ListView):
+class TranslatorListView(LoginRequiredMixin, ListView):
     model = Translator
     template_name = 'book/person_list.html'
 
@@ -159,7 +160,7 @@ class TranslatorListView(ListView):
         return context
 
 
-class TellerListView(ListView):
+class TellerListView(LoginRequiredMixin, ListView):
     model = Teller
     template_name = 'book/person_list.html'
 
@@ -174,7 +175,7 @@ class TellerListView(ListView):
         return context
 
 
-class PublisherListView(ListView):
+class PublisherListView(LoginRequiredMixin, ListView):
     model = Publisher
 
     def get_queryset(self):
@@ -185,7 +186,7 @@ class PublisherListView(ListView):
         return context
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
 
     def get_queryset(self):
@@ -196,7 +197,7 @@ class CategoryListView(ListView):
         return context
 
 
-class PhysicalBookCreateView(SuccessMessageMixin, CreateView):
+class PhysicalBookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = PhysicalBook
     form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
@@ -215,7 +216,7 @@ class PhysicalBookCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class PhysicalBookUpdateView(SuccessMessageMixin, UpdateView):
+class PhysicalBookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = PhysicalBook
     form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
@@ -230,7 +231,7 @@ class PhysicalBookUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class PhysicalBookDeleteView(SuccessMessageMixin, DeleteView):
+class PhysicalBookDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = PhysicalBook
     success_url = reverse_lazy('book:physicalbook')
     template_name = 'book/book_confirm_delete.html'
@@ -241,7 +242,7 @@ class PhysicalBookDeleteView(SuccessMessageMixin, DeleteView):
         return super(PhysicalBookDeleteView, self).delete(request, *args, **kwargs)
 
 
-class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
+class ElectronicBookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = ElectronicBook
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
@@ -260,7 +261,7 @@ class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class ElectronicBookUpdateView(SuccessMessageMixin, UpdateView):
+class ElectronicBookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = ElectronicBook
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
@@ -275,7 +276,7 @@ class ElectronicBookUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class ElectronicBookDeleteView(DeleteView):
+class ElectronicBookDeleteView(LoginRequiredMixin, DeleteView):
     model = ElectronicBook
     success_url = reverse_lazy('book:electronicbook')
     template_name = 'book/book_confirm_delete.html'
@@ -286,7 +287,7 @@ class ElectronicBookDeleteView(DeleteView):
         return super(ElectronicBookDeleteView, self).delete(request, *args, **kwargs)
 
 
-class AudioBookCreateView(SuccessMessageMixin, CreateView):
+class AudioBookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = AudioBook
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
@@ -306,7 +307,7 @@ class AudioBookCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class AudioBookUpdateView(SuccessMessageMixin, UpdateView):
+class AudioBookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = AudioBook
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
@@ -322,7 +323,7 @@ class AudioBookUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class AudioBookDeleteView(DeleteView):
+class AudioBookDeleteView(LoginRequiredMixin, DeleteView):
     model = AudioBook
     success_url = reverse_lazy('book:audiobook')
     template_name = 'book/book_confirm_delete.html'
@@ -333,7 +334,7 @@ class AudioBookDeleteView(DeleteView):
         return super(AudioBookDeleteView, self).delete(request, *args, **kwargs)
 
 
-class AuthorCreateView(SuccessMessageMixin, CreateView):
+class AuthorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Author
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -349,7 +350,7 @@ class AuthorCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class AuthorUpdateView(SuccessMessageMixin, UpdateView):
+class AuthorUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Author
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -361,7 +362,7 @@ class AuthorUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class AuthorDeleteView(DeleteView):
+class AuthorDeleteView(LoginRequiredMixin, DeleteView):
     model = Author
     success_url = reverse_lazy('book:author')
     template_name = 'book/person_confirm_delete.html'
@@ -378,7 +379,7 @@ class AuthorDeleteView(DeleteView):
         return super(AuthorDeleteView, self).delete(request, *args, **kwargs)
 
 
-class TranslatorCreateView(SuccessMessageMixin, CreateView):
+class TranslatorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -394,7 +395,7 @@ class TranslatorCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class TranslatorUpdateView(SuccessMessageMixin, UpdateView):
+class TranslatorUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -406,7 +407,7 @@ class TranslatorUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class TranslatorDeleteView(DeleteView):
+class TranslatorDeleteView(LoginRequiredMixin, DeleteView):
     model = Translator
     success_url = reverse_lazy('book:translator')
     template_name = 'book/person_confirm_delete.html'
@@ -423,7 +424,7 @@ class TranslatorDeleteView(DeleteView):
         return super(TranslatorDeleteView, self).delete(request, *args, **kwargs)
 
 
-class TellerCreateView(SuccessMessageMixin, CreateView):
+class TellerCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Translator
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -439,7 +440,7 @@ class TellerCreateView(SuccessMessageMixin, CreateView):
         return context
 
 
-class TellerUpdateView(SuccessMessageMixin, UpdateView):
+class TellerUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Translator
     fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
@@ -451,7 +452,7 @@ class TellerUpdateView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class TellerDeleteView(DeleteView):
+class TellerDeleteView(LoginRequiredMixin, DeleteView):
     model = Teller
     success_url = reverse_lazy('book:teller')
     template_name = 'book/person_confirm_delete.html'
@@ -468,7 +469,7 @@ class TellerDeleteView(DeleteView):
         return super(TranslatorDeleteView, self).delete(request, *args, **kwargs)
 
 
-class CategoryCreateView(SuccessMessageMixin, CreateView):
+class CategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
@@ -479,14 +480,14 @@ class CategoryCreateView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class CategoryUpdateView(SuccessMessageMixin, UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Category
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
     success_message = "دسته‌بندی با موفقیت ویرایش شد"
 
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     success_url = reverse_lazy('book:category')
     template_name = 'book/category_confirm_delete.html'
@@ -497,7 +498,7 @@ class CategoryDeleteView(DeleteView):
         return super(CategoryDeleteView, self).delete(request, *args, **kwargs)
 
 
-class PublisherCreateView(SuccessMessageMixin, CreateView):
+class PublisherCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
@@ -508,14 +509,14 @@ class PublisherCreateView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class PublisherUpdateView(SuccessMessageMixin, UpdateView):
+class PublisherUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Publisher
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
     success_message = "ناشر با موفقیت ویرایش شد"
 
 
-class PublisherDeleteView(DeleteView):
+class PublisherDeleteView(LoginRequiredMixin, DeleteView):
     model = Publisher
     success_url = reverse_lazy('book:publisher')
     template_name = 'book/publisher_confirm_delete.html'
