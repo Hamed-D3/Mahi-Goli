@@ -1,4 +1,5 @@
 import random
+from urllib import request
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
@@ -36,9 +37,9 @@ class AllBookView(TemplateView):
     def get(self, request, **kwargs):
         all_book = []
 
-        physicalbook = PhysicalBook.objects.all()
-        electronicbook = ElectronicBook.objects.all()
-        audiobook = AudioBook.objects.all()
+        physicalbook = PhysicalBook.objects.filter(user=self.request.user).all()
+        electronicbook = ElectronicBook.objects.filter(user=self.request.user).all()
+        audiobook = AudioBook.objects.filter(user=self.request.user).all()
 
         for book in physicalbook:
             all_book.append({
@@ -178,6 +179,10 @@ class PhysicalBookCreateView(SuccessMessageMixin, CreateView):
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت افزوده شد"
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class PhysicalBookUpdateView(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
@@ -194,7 +199,7 @@ class PhysicalBookDeleteView(SuccessMessageMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(PhysicalBookDelete, self).delete(request, *args, **kwargs)
+        return super(PhysicalBookDeleteView, self).delete(request, *args, **kwargs)
 
 
 class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
@@ -202,6 +207,10 @@ class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ElectronicBookUpdateView(SuccessMessageMixin, UpdateView):
@@ -219,7 +228,7 @@ class ElectronicBookDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(ElectronicBookDelete, self).delete(request, *args, **kwargs)
+        return super(ElectronicBookDeleteView, self).delete(request, *args, **kwargs)
 
 
 class AudioBookCreateView(SuccessMessageMixin, CreateView):
@@ -227,6 +236,10 @@ class AudioBookCreateView(SuccessMessageMixin, CreateView):
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class AudioBookUpdateView(SuccessMessageMixin, UpdateView):
@@ -244,14 +257,18 @@ class AudioBookDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(AudioBookDelete, self).delete(request, *args, **kwargs)
+        return super(AudioBookDeleteView, self).delete(request, *args, **kwargs)
 
 
 class AuthorCreateView(SuccessMessageMixin, CreateView):
     model = Author
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "نویسنده با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -261,7 +278,7 @@ class AuthorCreateView(SuccessMessageMixin, CreateView):
 
 class AuthorUpdateView(SuccessMessageMixin, UpdateView):
     model = Author
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "نویسنده با موفقیت ویرایش شد"
 
@@ -285,14 +302,18 @@ class AuthorDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(AuthorDelete, self).delete(request, *args, **kwargs)
+        return super(AuthorDeleteView, self).delete(request, *args, **kwargs)
 
 
 class TranslatorCreateView(SuccessMessageMixin, CreateView):
     model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "مترجم با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -302,7 +323,7 @@ class TranslatorCreateView(SuccessMessageMixin, CreateView):
 
 class TranslatorUpdateView(SuccessMessageMixin, UpdateView):
     model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "مترجم با موفقیت ویرایش شد"
 
@@ -326,14 +347,18 @@ class TranslatorDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(TranslatorDelete, self).delete(request, *args, **kwargs)
+        return super(TranslatorDeleteView, self).delete(request, *args, **kwargs)
 
 
 class TellerCreateView(SuccessMessageMixin, CreateView):
     model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "گوینده با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -343,7 +368,7 @@ class TellerCreateView(SuccessMessageMixin, CreateView):
 
 class TellerUpdateView(SuccessMessageMixin, UpdateView):
     model = Translator
-    fields = ['avatar', 'first_name', 'middle_name', 'last_name']
+    fields = ['avatar', 'first_name', 'last_name']
     template_name = 'book/person_create_update.html'
     success_message = "گوینده با موفقیت ویرایش شد"
 
@@ -367,7 +392,7 @@ class TellerDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(TranslatorDelete, self).delete(request, *args, **kwargs)
+        return super(TranslatorDeleteView, self).delete(request, *args, **kwargs)
 
 
 class CategoryCreateView(SuccessMessageMixin, CreateView):
@@ -375,6 +400,10 @@ class CategoryCreateView(SuccessMessageMixin, CreateView):
     fields = ['title', 'parent']
     template_name = 'book/category_create_update.html'
     success_message = "دسته‌بندی با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class CategoryUpdateView(SuccessMessageMixin, UpdateView):
@@ -392,7 +421,7 @@ class CategoryDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(CategoryDelete, self).delete(request, *args, **kwargs)
+        return super(CategoryDeleteView, self).delete(request, *args, **kwargs)
 
 
 class PublisherCreateView(SuccessMessageMixin, CreateView):
@@ -400,6 +429,10 @@ class PublisherCreateView(SuccessMessageMixin, CreateView):
     fields = ['title', 'url']
     template_name = 'book/publisher_create_update.html'
     success_message = "ناشر با موفقیت افزوده شد"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class PublisherUpdateView(SuccessMessageMixin, UpdateView):
@@ -417,4 +450,4 @@ class PublisherDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
-        return super(PublisherDelete, self).delete(request, *args, **kwargs)
+        return super(PublisherDeleteView, self).delete(request, *args, **kwargs)

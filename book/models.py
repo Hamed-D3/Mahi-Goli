@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 def ebook_file_format_validator(file_name) -> bool:
@@ -20,9 +21,9 @@ def audiobook_file_format_validator(file_name) -> bool:
 # abstract person model for inheritance author and translator model
 class AbstractPerson(models.Model):
     first_name = models.CharField(max_length=75, null=False, blank=False, verbose_name="نام")
-    middle_name = models.CharField(max_length=75, blank=True, default='', verbose_name="نام میانی")
     last_name = models.CharField(max_length=75, null=False, blank=False, verbose_name="نام خانوادگی")
     avatar = models.ImageField(upload_to='./images/person/', blank=True, verbose_name="عکس پروفایل")
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     
 
     class Meta:
@@ -31,7 +32,7 @@ class AbstractPerson(models.Model):
         abstract = True
 
     def __str__(self):
-        return self.first_name + ' ' + self.middle_name + ' ' + self.last_name
+        return self.first_name + ' ' + self.last_name
 
 
 class Author(AbstractPerson):
@@ -68,6 +69,7 @@ class Category(models.Model):
     title = models.CharField(max_length=150, null=True, verbose_name="دسته‌بندی")
     parent = models.ForeignKey('self', default=True, null=True, blank=True, on_delete=models.SET_NULL,
                             related_name='children', verbose_name='زیردسته')
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "دسته‌بندی"
@@ -90,6 +92,7 @@ class Category(models.Model):
 class Publisher(models.Model):
     title = models.CharField(max_length=256, verbose_name="نام")
     url = models.URLField(max_length=256, verbose_name="وب سایت")
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "ناشر"
@@ -135,11 +138,12 @@ class Book(models.Model):
     user_rate = models.SmallIntegerField(choices=RATE_CHOICES, null=True, blank=True, default=None, verbose_name="امتیاز")
     category = models.ManyToManyField(Category, blank=True, verbose_name="دسته‌بندی")
     price = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True, default=0, verbose_name="قیمت")
-    price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, default="FRE", verbose_name="واحد پول")
+    price_unit = models.CharField(max_length=3, choices=MONEY_UNIT, null=True, blank=True, default="FRE", verbose_name="واحد پول")
     user_description = models.TextField(null=True, blank=True, verbose_name="توضیحات کاربر درباره کتاب")
     book_description = models.TextField(null=True, blank=True, default=None, verbose_name="توضیحات کتاب")
     book_url = models.URLField(max_length=1024, null=True, blank=True, default=None, verbose_name="آدرس اینترنتی")
     publisher = models.ForeignKey(Publisher, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="ناشر")
+    user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "کتاب"

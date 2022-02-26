@@ -36,7 +36,13 @@
 										<td>{{ book.show_translator }}</td>
 										<td>{{ book.show_category }}</td>
 										<td>{{ book.show_publisher }}</td>
-										<td>{{ book.platform }}</td>
+										<td>
+                    {% if book.platform %}
+                      {{ book.platform }}
+                    {% else %}
+                      -
+                    {% endif %}
+                    </td>
 										<td>{{ book.show_user_rate }}</td>
 										<td>{{ book.status }}</td>
                     <td>{{ book.type }}</td>
