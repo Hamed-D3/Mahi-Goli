@@ -1,5 +1,4 @@
 import random
-from urllib import request
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
@@ -99,6 +98,9 @@ class AllBookView(TemplateView):
 
 class PhysicalBookListView(ListView):
     model = PhysicalBook
+
+    def get_queryset(self):
+        return PhysicalBook.objects.filter(user=self.request.user).all()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -108,6 +110,9 @@ class PhysicalBookListView(ListView):
 class ElectronicBookListView(ListView):
     model = ElectronicBook
 
+    def get_queryset(self):
+        return ElectronicBook.objects.filter(user=self.request.user).all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
@@ -115,6 +120,9 @@ class ElectronicBookListView(ListView):
 
 class AudioBookListView(ListView):
     model = AudioBook
+
+    def get_queryset(self):
+        return AudioBook.objects.filter(user=self.request.user).all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -124,6 +132,9 @@ class AudioBookListView(ListView):
 class AuthorListView(ListView):
     model = Author
     template_name = 'book/person_list.html'
+
+    def get_queryset(self):
+        return Author.objects.filter(user=self.request.user).all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -137,6 +148,9 @@ class TranslatorListView(ListView):
     model = Translator
     template_name = 'book/person_list.html'
 
+    def get_queryset(self):
+        return Translator.objects.filter(user=self.request.user).all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "مترجمین"
@@ -149,6 +163,9 @@ class TellerListView(ListView):
     model = Teller
     template_name = 'book/person_list.html'
 
+    def get_queryset(self):
+        return Teller.objects.filter(user=self.request.user).all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['model_title'] = "گویندگان"
@@ -160,6 +177,9 @@ class TellerListView(ListView):
 class PublisherListView(ListView):
     model = Publisher
 
+    def get_queryset(self):
+        return Publisher.objects.filter(user=self.request.user).all()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
@@ -167,6 +187,9 @@ class PublisherListView(ListView):
 
 class CategoryListView(ListView):
     model = Category
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user).all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -183,12 +206,28 @@ class PhysicalBookCreateView(SuccessMessageMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
+
 
 class PhysicalBookUpdateView(SuccessMessageMixin, UpdateView):
     model = PhysicalBook
     form_class = PhysicalBookCreateUpdateForm
     template_name = 'book/physicalbook_create_update.html'
     success_message = "کتاب فیزیکی با موفقیت ویرایش شد"
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
 
 
 class PhysicalBookDeleteView(SuccessMessageMixin, DeleteView):
@@ -212,12 +251,28 @@ class ElectronicBookCreateView(SuccessMessageMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
+
 
 class ElectronicBookUpdateView(SuccessMessageMixin, UpdateView):
     model = ElectronicBook
     form_class = ElectronicBookCreateUpdateForm
     template_name = 'book/electronicbook_create_update.html'
     success_message = "کتاب الکترونیکی با موفقیت ویرایش شد"
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
 
 
 class ElectronicBookDeleteView(DeleteView):
@@ -241,12 +296,30 @@ class AudioBookCreateView(SuccessMessageMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['teller'].queryset = Teller.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
+
 
 class AudioBookUpdateView(SuccessMessageMixin, UpdateView):
     model = AudioBook
     form_class = AudioBookCreateUpdateForm
     template_name = 'book/audiobook_create_update.html'
     success_message = "کتاب صوتی با موفقیت ویرایش شد"
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['form'].fields['author'].queryset = Author.objects.filter(user=self.request.user).all()
+        context['form'].fields['translator'].queryset = Translator.objects.filter(user=self.request.user).all()
+        context['form'].fields['teller'].queryset = Teller.objects.filter(user=self.request.user).all()
+        context['form'].fields['category'].queryset = Category.objects.filter(user=self.request.user).all()
+        context['form'].fields['publisher'].queryset = Publisher.objects.filter(user=self.request.user).all()
+        return context
 
 
 class AudioBookDeleteView(DeleteView):
