@@ -4,4 +4,5 @@
   {{ form|crispy }}
   <button type="submit">ثبت نام</button>
 </form>
-<a href="{% url 'accounts:login' %}">حساب کاربری دارید؟ وارد شوید</a>
+<a href="{% url 'login' %}">حساب کاربری دارید؟ وارد شوید</a> | 
+<a href="{% url 'password_reset' %}">رمز عبور خود را فراموش کردید؟</a>
