@@ -11,10 +11,10 @@
         <div class="col-2">
             {% if user.is_authenticated %}
             <p>hello {{user.first_name}}</p>
-            <a href="{% url 'password_change' %}">تغییر رمز عبور</a> | <a href="{% url 'logout' %}">خارج شدن</a>
+            <a href="{% url 'account_change_password' %}">تغییر رمز عبور</a> | <a href="{% url 'account_logout' %}">خارج شدن</a>
             {% else %}
             <p>سلام ناشناس</p>
-            <a href="{% url 'accounts:signup' %}">ثبت نام</a> | <a href="{% url 'login' %}">ورود</a>
+            <a href="{% url 'account_signup' %}">ثبت نام</a> | <a href="{% url 'account_login' %}">ورود</a>
             {% endif %}
         </div>
     </div>

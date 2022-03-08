@@ -1,8 +1,0 @@
-{% load crispy_forms_tags %}
-<h2>ورود</h2>
-<form method="post">{% csrf_token %}
-  {{ form|crispy }}
-  <button type="submit">ورود</button>
-</form>
-<a href="{% url 'accounts:signup' %}">حساب کاربری ندارید؟ ثبت نام کنید</a> | 
-<a href="{% url 'password_reset' %}">رمز عبور خود را فراموش کردید؟</a>

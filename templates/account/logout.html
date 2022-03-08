@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+<h2>خارج شدن</h2>
+<p>آیا مطمئنی میخوای از حسابت خارج شی؟</p>
+<form method="post">{% csrf_token %}
+  {{ form|crispy }}
+  <button type="submit">خارج شو</button>
+</form>
