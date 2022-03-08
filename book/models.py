@@ -22,7 +22,7 @@ def audiobook_file_format_validator(file_name) -> bool:
 class AbstractPerson(models.Model):
     first_name = models.CharField(max_length=75, null=False, blank=False, verbose_name="نام")
     last_name = models.CharField(max_length=75, null=False, blank=False, verbose_name="نام خانوادگی")
-    avatar = models.ImageField(upload_to='./images/person/', blank=True, verbose_name="عکس پروفایل")
+    avatar = models.ImageField(upload_to='images/person/', blank=True, verbose_name="عکس پروفایل")
     user = models.ForeignKey(get_user_model(), null=True, on_delete=models.CASCADE)
     
 
@@ -130,7 +130,7 @@ class Book(models.Model):
         ("CAD", "دلار کانادا"),
         ("AUD", "دلار استرالیا"),
     )
-    picture = models.ImageField(upload_to='./images/books/', blank=True, verbose_name='تصویر جلد')
+    picture = models.ImageField(upload_to='images/books/', blank=True, verbose_name='تصویر جلد')
     title = models.CharField(max_length=1500, verbose_name="نام کتاب")
     author = models.ManyToManyField(Author, verbose_name="نویسنده")
     translator = models.ManyToManyField(Translator, blank=True, verbose_name="مترجم")
@@ -241,7 +241,7 @@ class ElectronicBook(TextBook):
         ("prlib", "کتابخانه شخصی"),
         ("pulib", "کتابخانه عمومی"),
     )
-    book_file = models.FileField(upload_to='./book_files/', null=True, blank=True, validators=[ebook_file_format_validator])
+    book_file = models.FileField(upload_to='electronicbook_files/', null=True, blank=True, validators=[ebook_file_format_validator])
     platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
 
     class Meta:
@@ -282,7 +282,7 @@ class AudioBook(Book):
     season = models.PositiveSmallIntegerField(null= True, blank=True, verbose_name="فصل")
     listen_status = models.CharField(max_length=1, choices=LISTEN_STATUS, default='U', verbose_name="وضعیت")
     platform = models.CharField(max_length=5, choices=PLATFROM_LIST, null=True, blank=True, verbose_name="منبع کتاب")
-    book_file = models.FileField(upload_to='./book_files/', null=True, blank=True, validators=[audiobook_file_format_validator])
+    book_file = models.FileField(upload_to='audiobook_files/', null=True, blank=True, validators=[audiobook_file_format_validator])
 
     class Meta:
         verbose_name = "کتاب صوتی"
