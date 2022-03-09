@@ -1,0 +1,8 @@
+- add django project files into 'volumes/app/' directory
+- copy requirments.txt file into 'app/' directory
+- set config of postgresql database in core setting file of django project with environments variables
+- set 'STATIC_ROOT' directory to 'volumes/static/' directory
+- set 'MEDIA_ROOT' directory to 'volumes/media/' directory
+- run "docker-compose build --no-cache"
+- run "docker-compose up"
+- enjoy it! :)
